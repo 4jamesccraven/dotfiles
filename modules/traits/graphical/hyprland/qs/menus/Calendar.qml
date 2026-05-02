@@ -10,10 +10,8 @@ PopupWrapper {
     property int displayYear: new Date().getFullYear()
 
     onVisibleChanged: {
-        if (!visible) {
-            displayMonth = new Date().getMonth()
-            displayYear = new Date().getFullYear()
-        }
+        displayMonth = new Date().getMonth()
+        displayYear = new Date().getFullYear()
     }
 
     Column {
