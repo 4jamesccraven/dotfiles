@@ -132,28 +132,7 @@
         "mkdev": "mkdev",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
-        "ns": "ns",
-        "tree-sitter": "tree-sitter"
-      }
-    },
-    "tree-sitter": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1777537739,
-        "narHash": "sha256-5UigZeqjFGPhxXpVI6ZDM8U+xvcB++kfAPIDWBTwGD8=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
-        "rev": "8d737aa238084f9a51f1e97c195a362419beee8d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
-        "type": "github"
+        "ns": "ns"
       }
     }
   },
