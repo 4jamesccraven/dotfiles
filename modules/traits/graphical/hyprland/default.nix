@@ -92,7 +92,10 @@
 
           # ---[ Disable Annoyances ]---
           # :> Disable default wallpapers
-          misc.disable_hyprland_logo = true;
+          misc = {
+            disable_hyprland_logo = true;
+            middle_click_paste = false;
+          };
           # :> Disable popups
           ecosystem = {
             no_update_news = true;

@@ -115,6 +115,10 @@
               "$mod, mouse:272, movewindow"
               "$mod, mouse:273, resizewindow"
             ];
+
+            gesture = [
+              "3, vertical, workspace"
+            ];
           };
 
           # :> Submaps for moving windows and resizing
