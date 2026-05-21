@@ -34,25 +34,41 @@
   gnome.enable = true;
   hyprland.enable = true;
   home-manager.users.jamescraven = {
-    wayland.windowManager.hyprland = {
-      settings = {
-        exec-once = [
-          "openrgb -p main"
-          "${pkgs.xrandr}/bin/xrandr --output DP-3 --primary"
-          "steam -silent"
-        ];
+    xdg.configFile."hypr/generated/local.lua".text = /* lua */ ''
+      hl.on('hyprland.start', function()
+          hl.exec_cmd 'openrgb -p main'
+          hl.exec_cmd '${pkgs.xrandr}/bin/xrandr --output DP-3 --primary'
+          hl.exec_cmd 'steam -silent'
+      end)
 
-        monitor = [
-          "DP-3, 2560x1080@75, 0x0, 1.0"
-          "HDMI-A-1, 1920x1080, 320x-1080, 1.0"
-        ];
+      hl.monitor {
+          output = 'DP-3',
+          mode = '2560x1080@75',
+          position = '0x0',
+          scale = '1.0',
+      }
 
-        workspace = [
-          "1, monitor:DP-3, default:true"
-          "6, monitor:HDMI-A-1, persistent:true, default:true, on-created-empty:brave"
-        ];
-      };
-    };
+      hl.monitor {
+          output = 'HDMI-A-1',
+          mode = '1920x1080',
+          position = '320x-1080',
+          scale = '1.0',
+      }
+
+      hl.workspace_rule {
+          workspace = '1',
+          monitor = 'DP-3',
+          default = true,
+      }
+
+      hl.workspace_rule {
+          workspace = '6',
+          monitor = 'HDMI-A-1',
+          default = true,
+          persistent = true,
+          on_created_empty = 'brave',
+      }
+    '';
   };
 
   # ---[ Hardware ] ---

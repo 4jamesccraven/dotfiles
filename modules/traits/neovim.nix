@@ -29,7 +29,6 @@
 
       # :> etc.
       gcc
-      # inputs.tree-sitter.packages.${pkgs.stdenv.hostPlatform.system}.default
       tree-sitter
       websocat
       wl-clipboard

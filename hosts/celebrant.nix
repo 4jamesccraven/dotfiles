@@ -27,11 +27,14 @@
 
   hyprland.enable = true;
   home-manager.users.jamescraven = {
-    wayland.windowManager.hyprland.settings = {
-      monitor = [
-        "eDP-1, 1920x1200, 0x0, 1.2"
-      ];
-    };
+    xdg.configFile."hypr/generated/local.lua".text = /* lua */ ''
+      hl.monitor {
+          output = 'eDP-1',
+          mode = '1920x1200',
+          position = '0x0',
+          scale = '1.2',
+      }
+    '';
   };
 
   programs.steam.enable = true;

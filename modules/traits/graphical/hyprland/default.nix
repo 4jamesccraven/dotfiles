@@ -13,12 +13,10 @@
 {
   imports = [
     # keep-sorted start
-    ./binds.nix
     ./fuzzel.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./quickshell.nix
-    ./window-rules.nix
     # keep-sorted end
   ];
 
@@ -28,85 +26,97 @@
 
   config = lib.mkIf config.hyprland.enable {
     # Enable in *NixOS*
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
 
     environment.systemPackages = with pkgs; [
+      # keep-sorted start
+      brightnessctl
       hyprshutdown
       pavucontrol
+      screenie
+      # keep-sorted end
     ];
 
-    home-manager.users.jamescraven = {
-      wayland.windowManager.hyprland = {
-        enable = true; # Enable in *home-manager*
-        configType = "hyprlang"; # Force hyprlang for now.
+    environment.pathsToLink = [ "/share/hypr" ];
 
-        settings = {
-          # ---[ Startup ]----
-          exec-once = [
-            "hyprctl setcursor Dracula-cursors 22"
-            "blueman-applet"
-            "fcitx5 -d"
-          ];
-
-          # ---[ Compatibility ]---
-          env = [
-            "GDK_SCALE, 2"
-            "XCURSOR_SIZE, 22"
-          ];
-          xwayland.force_zero_scaling = true;
-
-          # ---[ Input ]---
-          input = {
-            kb_layout = "us,es,kr"; # English, Spanish, & Korean
-            natural_scroll = false;
-            numlock_by_default = true;
-
-            touchpad = {
-              natural_scroll = false;
-            };
+    home-manager.users.jamescraven =
+      let
+        cfg = config;
+      in
+      { config, ... }:
+      {
+        # :> Hook in other systemd user units from hm
+        systemd.user.targets.hyprland-session = {
+          Unit = {
+            Description = "Hyprland session";
+            BindsTo = [ "graphical-session.target" ];
+            Wants = [ "graphical-session-pre.target" ];
+            After = [ "graphical-session-pre.target" ];
           };
+        };
 
-          # ---[ Appearance ]---
-          # :> Border Colours
-          general =
-            let
-              inherit (config.ext) colours;
-              active = "rgba(${colours.accent.hex}ff)";
-              inactive = "rgba(${colours.base.hex}ff)";
-            in
-            {
-              border_size = 3;
-              gaps_in = "5";
-              gaps_out = "20 20 20 10";
-              "col.active_border" = active;
-              "col.inactive_border" = inactive;
-              resize_on_border = true;
-            };
+        # Stub to point hyprland to the config subdirectory.
+        xdg.configFile."hypr/hyprland.lua".text = /* lua */ ''
+          require('config')
+        '';
 
-          # :> Window Decoration
-          decoration = {
-            rounding = "10";
-            active_opacity = "0.95";
-            inactive_opacity = "0.90";
-          };
+        # Symlink the actual config directory.
+        xdg.configFile."hypr/config".source =
+          let
+            inherit (config.home) homeDirectory;
+          in
+          config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/nixos/modules/traits/graphical/hyprland/hypr";
 
-          animation = [ "workspaces, 1, 5, default, slidevert" ];
+        # Expose catppuccin as a lua table in the format hyprland likes to use.
+        xdg.configFile."hypr/generated/theme.lua".text =
+          let
+            inherit (cfg.ext) colours;
+            toHyprFunc = col: "rgb(${col.hex})";
+            toHyprGrad = col: "rgba(${col.hex}ff)";
+            luaDecl = name: val: "        [\"${name}\"] = '${val}',";
 
-          # ---[ Disable Annoyances ]---
-          # :> Disable default wallpapers
-          misc = {
-            disable_hyprland_logo = true;
-            middle_click_paste = false;
-          };
-          # :> Disable popups
-          ecosystem = {
-            no_update_news = true;
-            no_donation_nag = true;
-          };
+            mkTable = vals: ''
+              {
+              ${lib.concatLines vals}
+                  }'';
 
-        }; # settings
+            mkColourTable =
+              fmtFunc:
+              lib.pipe colours [
+                (builtins.mapAttrs (_: fmtFunc))
+                (lib.mapAttrsToList luaDecl)
+                mkTable
+              ];
+
+            cols = mkColourTable toHyprFunc;
+            grads = mkColourTable toHyprGrad;
+          in
+          /* lua */ ''
+            local theme = {
+                colour = ${cols},
+                gradient = ${grads}
+            }
+            return theme
+          '';
+
+        # Expose the terminal config.
+        xdg.configFile."hypr/generated/terminal.lua".text =
+          let
+            inherit (cfg.ext) term;
+            terminal = term.bin;
+            runInTerm = term.runCmds;
+          in
+          /* lua */ ''
+            local term = {
+                name = '${terminal}',
+                run_in_term = '${runInTerm}',
+            }
+            return term
+          '';
       };
-    }; # home-manager
 
-  }; # config
+  };
 }
