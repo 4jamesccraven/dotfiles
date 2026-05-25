@@ -1,5 +1,5 @@
 local term = require 'generated/terminal'
-local mod = 'SUPER' -- Sets 'Windows' key as main modifier
+local mod = 'SUPER'
 
 -- :> General
 hl.bind(mod .. ' + Q', hl.dsp.window.close())
@@ -21,7 +21,7 @@ hl.bind(mod .. ' + F', function()
     local was_floating = win.floating                      -- Get current floating state
     hl.dispatch(hl.dsp.window.float { action = 'toggle' }) -- toggle unconditionally
 
-    -- Centre and resize if it was floating before
+    -- Centre and resize if it wasn't floating before
     if not was_floating then
         local mon = hl.get_active_monitor()
         if not mon then return end
@@ -82,11 +82,34 @@ hl.bind('ALT + TAB', function()
     hl.dispatch(hl.dsp.focus({ window = next }))
 end)
 
+-- :> Resize
+hl.define_submap('resize', function()
+    hl.bind('h', hl.dsp.window.resize { x = -10, y = 0, relative = true }, { repeating = true })
+    hl.bind('j', hl.dsp.window.resize { x = 0, y = 10, relative = true }, { repeating = true })
+    hl.bind('k', hl.dsp.window.resize { x = 0, y = -10, relative = true }, { repeating = true })
+    hl.bind('l', hl.dsp.window.resize { x = 10, y = 0, relative = true }, { repeating = true })
+
+    hl.bind('escape', hl.dsp.submap 'reset')
+    hl.bind(mod .. ' + R', hl.dsp.submap 'reset')
+end)
+hl.bind(mod .. ' + R', hl.dsp.submap 'resize')
+
 -- :> Change workspace
 for i = 1, 5 do
     hl.bind(mod .. ' + ' .. i, hl.dsp.focus { workspace = i })
     hl.bind(mod .. ' + SHIFT + ' .. i, hl.dsp.focus { workspace = 5 + i })
 end
+
+-- :> Move window to workspace
+hl.define_submap('movews', 'reset', function()
+    for i = 1, 5 do
+        hl.bind(tostring(i), hl.dsp.window.move { workspace = i })
+        hl.bind('SHIFT + ' .. i, hl.dsp.window.move { workspace = 5 + i })
+    end
+
+    hl.bind('escape', hl.dsp.submap 'reset')
+end)
+hl.bind(mod .. ' + W', hl.dsp.submap 'movews')
 
 -- :> Screenshots
 hl.bind('Print', hl.dsp.exec_cmd 'screenie')
