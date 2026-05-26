@@ -6,7 +6,8 @@ return {
         { owner = 'nvim-tree', repo = 'nvim-web-devicons' },
     },
     config = function()
-        require 'config.map' ('n', '<S-Tab>', ':BufferNext<CR>')
-        require 'config.map' ('n', '<S-w>', ':BufferClose<CR>')
+        local map = require 'config.map'
+        map('n', '<S-Tab>', ':BufferNext<CR>')
+        map('n', '<S-w>', ':BufferClose<CR>')
     end
 }

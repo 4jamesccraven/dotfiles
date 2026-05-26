@@ -21,6 +21,9 @@ return {
         local i = ls.insert_node
         local f = ls.function_node
 
+        ---Returns text from an arbitrary command.
+        ---@param cmd string the command to run
+        ---@return string?
         local function shell_cmd(cmd)
             local handle = io.popen(cmd)
             if not handle then return end

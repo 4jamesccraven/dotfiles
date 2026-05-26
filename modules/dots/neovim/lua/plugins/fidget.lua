@@ -2,6 +2,6 @@ return {
     owner = 'j-hui',
     repo = 'fidget.nvim',
     config = function()
-        require 'fidget'.setup({})
+        require 'fidget'.setup {}
     end
 }
