@@ -1,7 +1,9 @@
---- Create a generic floating, centered window rule for a given set of criteria.
---@ param match The match props as defined on the hyprland wiki.
+---@alias HL.WindowProps table<string, string|number|boolean>
+
+---Create a generic floating, centred window rule for a given set of criteria.
+---@param match HL.WindowProps The match props as defined on the hyprland wiki.
+---@return nil
 local function float_rule(match)
-    if not match then return end
     hl.window_rule {
         match = match,
         float = true,
@@ -20,6 +22,7 @@ hl.window_rule {
     size = { 800, 250 },
 }
 
+---@type HL.WindowProps[]
 local to_float = {
     {
         class = "brave",

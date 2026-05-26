@@ -1,103 +1,62 @@
-local term = require 'generated/terminal'
-local mod = 'SUPER'
+local helpers = require 'config.bind-helpers'
+local term = require 'generated.terminal'
 
--- :> General
-hl.bind(mod .. ' + Q', hl.dsp.window.close())
-hl.bind(mod .. ' + E', hl.dsp.exec_cmd 'nautilus')
-hl.bind('ALT + Space', hl.dsp.exec_cmd 'fuzzel')
-hl.bind(mod .. ' + Return', hl.dsp.exec_cmd(term.name))
-hl.bind('CTRL + SHIFT + Escape', hl.dsp.exec_cmd(term.run_in_term .. ' btop'))
-hl.bind('XF86Calculator', hl.dsp.exec_cmd 'qalculate-gtk')
+---@alias JCC.Bind [string, string|function|HL.Dispatcher, JCC.BindOpts?]
+---@type JCC.Bind[]
+local binds = {
+    -- :> General
+    { 'SUPER + E',             'nautilus',                                         { cmd = true, } },
+    { 'ALT + Space',           'fuzzel',                                           { cmd = true, } },
+    { 'SUPER + Return',        term.name,                                          { cmd = true, } },
+    { 'CTRL + SHIFT + Escape', term.run_in_term .. ' btop',                        { cmd = true, } },
+    { 'XF86Calculator',        'qalculate-gtk',                                    { cmd = true, } },
+    -- Power/Session control
+    { 'SUPER + L',             'hyprlock',                                         { cmd = true, } },
+    { 'SUPER + V',             'hyprshutdown',                                     { cmd = true, } },
+    { 'SUPER + SHIFT + V',     'shutdown now',                                     { cmd = true, } },
+    -- Screenshots
+    { 'Print',                 'screenie',                                         { cmd = true, } },
+    { 'SHIFT + Print',         'screenie output',                                  { cmd = true, } },
 
--- :> Fullscreen control
-hl.bind(mod .. ' + M', hl.dsp.window.fullscreen { mode = 'maximized' })
-hl.bind(mod .. ' + SHIFT + M', hl.dsp.window.fullscreen { mode = 'fullscreen' })
+    -- :> Window Control
+    -- Close window
+    { 'SUPER + Q',             hl.dsp.window.close() },
+    -- Fullscreen
+    { 'SUPER + M',             hl.dsp.window.fullscreen { mode = 'maximized' } },
+    { 'SUPER + SHIFT + M',     hl.dsp.window.fullscreen { mode = 'fullscreen' } },
+    -- Floating
+    { 'SUPER + F',             helpers.toggle_float }, -- Function floats and centres a window (or tiles if floating)
+    -- Cycle visible
+    { 'ALT + TAB',             helpers.cycle_visible },
+    -- Mouse
+    { 'SUPER + mouse:272',     hl.dsp.window.drag(),                               { passthru = { mouse = true, } } },
+    { 'SUPER + mouse:273',     hl.dsp.window.resize,                               { passthru = { mouse = true, } } },
 
--- :> Floating window toggle
-hl.bind(mod .. ' + F', function()
-    local win = hl.get_active_window()
-    if not win then return end
+    -- :> Media keys
+    { 'XF86AudioRaiseVolume',  'wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+', { cmd = true, media = true, } },
+    { 'XF86AudioLowerVolume',  'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-',        { cmd = true, media = true, } },
+    { 'XF86AudioMute',         'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle',       { cmd = true, media = true, } },
+    { 'XF86AudioMicMute',      'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle',     { cmd = true, media = true, } },
+    { 'XF86MonBrightnessDown', 'brightnessctl set 10%-',                           { cmd = true, media = true, } },
+    { 'XF86MonBrightnessUp',   'brightnessctl set 10%+',                           { cmd = true, media = true, } },
+}
+for _, b in ipairs(binds) do
+    helpers.bind(b[1], b[2], b[3])
+end
 
-    local was_floating = win.floating                      -- Get current floating state
-    hl.dispatch(hl.dsp.window.float { action = 'toggle' }) -- toggle unconditionally
 
-    -- Centre and resize if it wasn't floating before
-    if not was_floating then
-        local mon = hl.get_active_monitor()
-        if not mon then return end
-
-        local scale_factor = 0.65 -- Scale factor for floating size.
-        hl.dispatch(hl.dsp.window.resize {
-            x = mon.width * scale_factor,
-            y = mon.height * scale_factor,
-            relative = false,
-        })
-
-        hl.dispatch(hl.dsp.window.center())
-    end
-end)
-
--- :> System power/administration
-hl.bind(mod .. ' + L', hl.dsp.exec_cmd 'hyprlock')
-hl.bind(mod .. ' + V', hl.dsp.exec_cmd 'hyprshutdown')
-hl.bind(mod .. ' + SHIFT + V', hl.dsp.exec_cmd 'shutdown now')
-
--- :> Window management
+-- :> Directional window movement/focus change
 local dir_binds = { left = 'h', down = 'j', up = 'k', right = 'l', }
 for dir, bind in pairs(dir_binds) do
     hl.bind('ALT + ' .. bind, hl.dsp.focus { direction = dir })
-    hl.bind(mod .. ' + SHIFT + ' .. bind, hl.dsp.window.move { direction = dir })
+    hl.bind('SUPER + SHIFT + ' .. bind, hl.dsp.window.move { direction = dir })
 end
-hl.bind('ALT + TAB', function()
-    local monitors = hl.get_monitors()
-    local windows = hl.get_windows()
-    local current = hl.get_active_window()
-    if not windows or not current then return end
 
-    -- Collect visible workspaces.
-    local visible_wss = {}
-    for _, m in ipairs(monitors) do
-        visible_wss[m.active_workspace.id] = true
-    end
-
-    -- Collect windows that are on visible workspaces.
-    local visible = {}
-    for _, w in ipairs(windows) do
-        if visible_wss[w.workspace.id] then
-            table.insert(visible, w)
-        end
-    end
-    if #visible == 0 then return end
-
-    -- Find the next visible window.
-    local next = nil
-    for i, w in ipairs(visible) do
-        if w.address == current.address then
-            next = visible[(i % #visible) + 1]
-            break
-        end
-    end
-
-    -- Focus next.
-    hl.dispatch(hl.dsp.focus({ window = next }))
-end)
-
--- :> Resize
-hl.define_submap('resize', function()
-    hl.bind('h', hl.dsp.window.resize { x = -10, y = 0, relative = true }, { repeating = true })
-    hl.bind('j', hl.dsp.window.resize { x = 0, y = 10, relative = true }, { repeating = true })
-    hl.bind('k', hl.dsp.window.resize { x = 0, y = -10, relative = true }, { repeating = true })
-    hl.bind('l', hl.dsp.window.resize { x = 10, y = 0, relative = true }, { repeating = true })
-
-    hl.bind('escape', hl.dsp.submap 'reset')
-    hl.bind(mod .. ' + R', hl.dsp.submap 'reset')
-end)
-hl.bind(mod .. ' + R', hl.dsp.submap 'resize')
 
 -- :> Change workspace
 for i = 1, 5 do
-    hl.bind(mod .. ' + ' .. i, hl.dsp.focus { workspace = i })
-    hl.bind(mod .. ' + SHIFT + ' .. i, hl.dsp.focus { workspace = 5 + i })
+    hl.bind('SUPER + ' .. i, hl.dsp.focus { workspace = i })
+    hl.bind('SUPER + SHIFT + ' .. i, hl.dsp.focus { workspace = 5 + i })
 end
 
 -- :> Move window to workspace
@@ -109,25 +68,23 @@ hl.define_submap('movews', 'reset', function()
 
     hl.bind('escape', hl.dsp.submap 'reset')
 end)
-hl.bind(mod .. ' + W', hl.dsp.submap 'movews')
+hl.bind('SUPER + W', hl.dsp.submap 'movews')
 
--- :> Screenshots
-hl.bind('Print', hl.dsp.exec_cmd 'screenie')
-hl.bind('SHIFT + Print', hl.dsp.exec_cmd 'screenie output')
 
--- :> Multimedia keys.
-local el = { locked = true, repeating = true }
-hl.bind('XF86AudioRaiseVolume', hl.dsp.exec_cmd 'wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+', el)
-hl.bind('XF86AudioLowerVolume', hl.dsp.exec_cmd 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-', el)
-hl.bind('XF86AudioMute', hl.dsp.exec_cmd 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle', el)
-hl.bind('XF86AudioMicMute', hl.dsp.exec_cmd 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle', el)
-hl.bind('XF86MonBrightnessDown', hl.dsp.exec_cmd 'brightnessctl set 10%-', el)
-hl.bind('XF86MonBrightnessUp', hl.dsp.exec_cmd 'brightnessctl set 10%+', el)
+-- :> Resize
+hl.define_submap('resize', function()
+    hl.bind('h', hl.dsp.window.resize { x = -10, y = 0, relative = true }, { repeating = true })
+    hl.bind('j', hl.dsp.window.resize { x = 0, y = 10, relative = true }, { repeating = true })
+    hl.bind('k', hl.dsp.window.resize { x = 0, y = -10, relative = true }, { repeating = true })
+    hl.bind('l', hl.dsp.window.resize { x = 10, y = 0, relative = true }, { repeating = true })
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mod .. ' + mouse:272', hl.dsp.window.drag(), { mouse = true })
-hl.bind(mod .. ' + mouse:273', hl.dsp.window.resize(), { mouse = true })
+    hl.bind('escape', hl.dsp.submap 'reset')
+    hl.bind('SUPER + R', hl.dsp.submap 'reset')
+end)
+hl.bind('SUPER + R', hl.dsp.submap 'resize')
 
+
+-- :> Touchpad gesture
 hl.gesture {
     fingers = 3,
     direction = 'vertical',

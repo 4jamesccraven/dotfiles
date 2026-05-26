@@ -1,8 +1,8 @@
-require 'generated/local'
-require 'config/settings'
-require 'config/binds'
-require 'config/window-rules'
-require 'config/anim'
+require 'generated.local'
+require 'config.settings'
+require 'config.binds'
+require 'config.window-rules'
+require 'config.anim'
 
 hl.on('hyprland.start', function()
     hl.exec_cmd 'systemctl --user start hyprland-session.target'

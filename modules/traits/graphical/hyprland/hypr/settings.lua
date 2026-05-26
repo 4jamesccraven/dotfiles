@@ -1,8 +1,8 @@
+local theme = require('generated.theme').gradient
 hl.env('GDK_SCALE', '2')
 hl.env('XCURSOR_SIZE', '22')
 
-local theme = require('generated/theme').gradient
-hl.config({
+hl.config {
     ---[ General ]---
     general = {
         border_size = 3,
@@ -45,7 +45,7 @@ hl.config({
         },
     },
 
-    ---[ Make V*xry Shut Up ]---
+    ---[ Remove Annoyances ]---
     ecosystem = {
         no_update_news = true,
         no_donation_nag = true,
@@ -55,4 +55,4 @@ hl.config({
         disable_hyprland_logo = true,
         middle_click_paste = false,
     },
-})
+}
