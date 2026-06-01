@@ -48,7 +48,7 @@ Item {
                     id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: Hyprland.dispatch("workspace " + wsNumber)
+                    onClicked: Hyprland.dispatch(`hl.dsp.focus { workspace = ${wsNumber} }`)
                 }
             }
         }
