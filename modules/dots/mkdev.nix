@@ -15,10 +15,6 @@
     programs.mkdev = {
       enable = true;
 
-      extraPackages = with pkgs; [
-        mkf
-      ];
-
       # :> User Config
       config = {
         recipe_dir = "/home/jamescraven/.config/mkdev/recipes";
