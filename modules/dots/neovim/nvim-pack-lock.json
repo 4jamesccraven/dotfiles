@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "barbar.nvim": {
-      "rev": "a4bef5b4fc1f064f2f673172252028eae18191c9",
+      "rev": "337ecfadb8bf005050990bf2f624dc4fc828dabd",
       "src": "https://github.com/romgrk/barbar.nvim"
     },
     "cmp-nvim-lsp": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/saadparwaiz1/cmp_luasnip"
     },
     "decisive.nvim": {
-      "rev": "c401541b8429b787d7dcb441e43bee63fc94737c",
+      "rev": "3bdee1e650a5ed39f24042ca293f49bb01bcc5c3",
       "src": "https://github.com/emmanueltouzery/decisive.nvim"
     },
     "fidget.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "nvim": {
-      "rev": "0303a7208dba448c459767486a38a6ec05c4216b",
+      "rev": "49a926655a2f5579e9c276470fc300baaa49e524",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-autopairs": {
@@ -49,11 +49,11 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b",
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
-      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
@@ -85,7 +85,7 @@
       "src": "https://github.com/triglav/vim-visual-increment"
     },
     "yazi.nvim": {
-      "rev": "af52ba3a412b4cd63b789378370dd3b099782aaa",
+      "rev": "7514be498c56f2a57e5a72faf55c517b9576665b",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
