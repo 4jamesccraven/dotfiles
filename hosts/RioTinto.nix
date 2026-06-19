@@ -30,6 +30,10 @@
 
   networking.hostName = "RioTinto";
 
+  environment.systemPackages = with pkgs; [
+    ollama-cuda
+  ];
+
   # :> Graphical Settings
   gnome.enable = true;
   hyprland.enable = true;
