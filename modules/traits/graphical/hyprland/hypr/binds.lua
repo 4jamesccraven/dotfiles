@@ -14,6 +14,7 @@ local binds = {
     { 'SUPER + L',             'hyprlock',                                         { cmd = true, } },
     { 'SUPER + V',             'hyprshutdown',                                     { cmd = true, } },
     { 'SUPER + SHIFT + V',     'shutdown now',                                     { cmd = true, } },
+    { 'switch:on:Lid Switch',  'hyprlock',                                         { cmd = true, locked = true } },
     -- Screenshots
     { 'Print',                 'screenie',                                         { cmd = true, } },
     { 'SHIFT + Print',         'screenie output',                                  { cmd = true, } },
