@@ -60,7 +60,7 @@
 
         # Stub to point hyprland to the config subdirectory.
         xdg.configFile."hypr/hyprland.lua".text = /* lua */ ''
-          require('config')
+          require 'config'
         '';
 
         # Symlink the actual config directory.
