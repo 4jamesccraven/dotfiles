@@ -31,7 +31,7 @@ local binds = {
     { 'ALT + TAB',             helpers.cycle_visible },
     -- Mouse
     { 'SUPER + mouse:272',     hl.dsp.window.drag(),                               { passthru = { mouse = true, } } },
-    { 'SUPER + mouse:273',     hl.dsp.window.resize,                               { passthru = { mouse = true, } } },
+    { 'SUPER + mouse:273',     hl.dsp.window.resize(),                             { passthru = { mouse = true, } } },
 
     -- :> Media keys
     { 'XF86AudioRaiseVolume',  'wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+', { cmd = true, media = true, } },
