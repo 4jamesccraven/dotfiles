@@ -95,9 +95,7 @@ return {
                     vim.api.nvim_create_autocmd('BufWritePre', {
                         buffer = args.buf,
                         callback = function()
-                            if not vim.tbl_contains({ "c", "cpp" }, vim.bo.filetype) then
-                                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-                            end
+                            vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
                         end,
                     })
                 end
