@@ -1,4 +1,6 @@
--- A simple plugin manager based on vim.pack
+-- YAP -- Yet Another Plugin-manager
+-- Simple `vim.pack`-based plugin manager for NVIM >= 0.12
+--
 -- Copyright (C) 2026  James C Craven
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -13,8 +15,77 @@
 --
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--
+-- # INSTALLATION
+-- Place this file in your config at `$XDG_CONFIG_HOME/$NVIM_APPNAME/lua/yap.lua`,
+-- and call `require 'yap'.setup()` in your `init.lua`.
+--
+-- To install a plugin, create a file under `lua/plugins` that returns a `Plug`
+-- table (see docs below).
+--
+-- # QUICK START
+-- First run this series of commands:
+-- ```bash
+-- $ cd ~/.config/nvim/lua/
+-- $ curl -O https://raw.githubusercontent.com/4jamesccraven/dotfiles/refs/heads/main/modules/dots/neovim/lua/yap.lua
+-- $ echo "require 'yap'.setup()" >> ../init.lua
+-- $ mkdir plugins
+-- ```
+-- Then, add lua files under plugins. For example, to install barbar with config,
+-- place this in `lua/plugins/barbar.lua`:
+-- ```lua
+-- return {
+--     owner = 'romgrk',
+--     repo = 'barbar.nvim',
+--     immediate = true,
+--     deps = {
+--         { owner = 'nvim-tree', repo = 'nvim-web-devicons' },
+--     },
+--     config = function()
+--         local map = require 'config.map'
+--         map('n', '<S-Tab>', ':BufferNext<CR>')
+--         map('n', '<S-w>', ':BufferClose<CR>')
+--     end
+-- }
+-- ```
 local M = {}
 
+-- USER COMMANDS
+local function init_user_commands()
+    -- Setup user commands for convenience.
+    -- Fetch new packages.
+    vim.api.nvim_create_user_command('PackUpdate', function(opts)
+        local packages = vim.split(opts.args, '%s+')
+
+        if #packages == 1 and packages[1] == "" then
+            vim.pack.update(nil)
+        else
+            vim.pack.update(packages)
+        end
+    end, {
+        nargs = '*',
+        complete = function(arg_lead, _, _)
+            ---@param p_candidate string
+            ---@return boolean
+            local function is_candidate(p_candidate)
+                return p_candidate:sub(1, #arg_lead) == arg_lead
+            end
+
+            return vim.iter(vim.pack.get())
+                :map(function(p) return p.spec.name end)
+                :filter(is_candidate)
+                :totable()
+        end,
+    })
+
+    -- Sync to the lockfile.
+    vim.api.nvim_create_user_command('PackSync', function()
+        vim.pack.update(nil, { target = 'lockfile' })
+    end, {})
+end
+
+-- LIB
+-- PLUGIN SPECIFICATION DOCS
 ---@class Plug
 ---@field owner string        The owner of the git repo (username)
 ---@field repo string         The name of the git repo
@@ -49,7 +120,7 @@ local function collect_plugs(dir)
         local name, fs_type = vim.uv.fs_scandir_next(scan)
         if not name then break end
 
-        if fs_type == 'file' and name:match("%.lua$") and name ~= "init.lua" then
+        if fs_type == 'file' and name:match("%.lua$") then
             local module = 'plugins.' .. name:gsub("%.lua$", '')
             local ok, conf = pcall(require, module)
             if not ok then
@@ -105,47 +176,52 @@ local function run_configs_if(plugs, predicate)
     end
 end
 
--- Collect user configuration.
-local plugs = collect_plugs(vim.fn.stdpath('config') .. '/lua/plugins')
----@type string[]
-local specs = {}
----@type table<string, true>
-local seen = {}
+function M.setup()
+    -- Setup the user commands.
+    init_user_commands()
 
-if plugs ~= nil then
-    -- Sort the list of plugins so that loading is deterministic
-    table.sort(plugs, function(a, b)
-        return (a.owner .. '/' .. a.repo) < (b.owner .. '/' .. b.repo)
-    end)
+    -- Collect user configuration.
+    local plugs = collect_plugs(vim.fn.stdpath('config') .. '/lua/plugins')
+    ---@type string[]
+    local specs = {}
+    ---@type table<string, true>
+    local seen = {}
 
-    -- Ensure that all plugins are installed
-    for _, plug in ipairs(plugs) do
-        collect_specs(plug, specs, seen)
-    end
-    vim.pack.add(specs)
+    if plugs ~= nil then
+        -- Sort the list of plugins so that loading is deterministic
+        table.sort(plugs, function(a, b)
+            return (a.owner .. '/' .. a.repo) < (b.owner .. '/' .. b.repo)
+        end)
 
-    -- Run plugins marked for immediate execution.
-    run_configs_if(plugs, function(p) return p.immediate end)
-
-    -- Wait until neovim has started to load the rest.
-    vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-            run_configs_if(plugs, function(p)
-                return not p.immediate
-            end)
+        -- Ensure that all plugins are installed
+        for _, plug in ipairs(plugs) do
+            collect_specs(plug, specs, seen)
         end
-    })
-end
+        vim.pack.add(specs)
 
--- Remove unused plugins (i.e., ones that have had their configuration deleted
--- since the previous startup).
-local unused = vim.iter(vim.pack.get())
-    :filter(function(x) return not x.active end)
-    :map(function(x) return x.spec.name end)
-    :totable()
+        -- Run plugins marked for immediate execution.
+        run_configs_if(plugs, function(p) return p.immediate end)
 
-if not vim.tbl_isempty(unused) then
-    vim.pack.del(unused)
+        -- Wait until neovim has started to load the rest.
+        vim.api.nvim_create_autocmd("VimEnter", {
+            callback = function()
+                run_configs_if(plugs, function(p)
+                    return not p.immediate
+                end)
+            end
+        })
+    end
+
+    -- Remove unused plugins (i.e., ones that have had their configuration deleted
+    -- since the previous startup).
+    local unused = vim.iter(vim.pack.get())
+        :filter(function(x) return not x.active end)
+        :map(function(x) return x.spec.name end)
+        :totable()
+
+    if not vim.tbl_isempty(unused) then
+        vim.pack.del(unused)
+    end
 end
 
 return M
