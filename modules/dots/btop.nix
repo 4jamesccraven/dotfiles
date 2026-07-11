@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 /*
   ====[ Btop ]====
@@ -11,6 +11,7 @@
     # :> Settings
     programs.btop = {
       enable = true;
+      package = pkgs.btop; # Must be specified or the overlay doesn't apply
 
       settings = {
         color_theme = "TTY";

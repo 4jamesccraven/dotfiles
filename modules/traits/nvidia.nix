@@ -29,4 +29,10 @@
     };
   };
 
+  nixpkgs.overlays = [
+    (_final: prev: {
+      btop = prev.btop.override { cudaSupport = true; };
+    })
+  ];
+
 }
