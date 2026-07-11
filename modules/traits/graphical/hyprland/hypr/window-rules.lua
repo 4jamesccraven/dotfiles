@@ -40,6 +40,10 @@ local to_float = {
         class = "xdg-desktop-portal-gtk",
         title = "xdg-desktop-portal-gtk",
     },
+    {
+        class = "steam",
+        title = "Steam",
+    },
     { class = "org.gnome.Nautilus" },
     { class = "org.telegram.desktop" },
     { class = "org.pulseaudio.pavucontrol" },
