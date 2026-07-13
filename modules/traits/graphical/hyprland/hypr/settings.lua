@@ -1,4 +1,4 @@
-local theme = require('generated.theme').gradient
+local theme = require 'generated.theme'.gradient
 hl.env('GDK_SCALE', '2')
 hl.env('XCURSOR_SIZE', '22')
 

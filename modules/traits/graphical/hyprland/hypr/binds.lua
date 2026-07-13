@@ -26,7 +26,7 @@ local binds = {
     { 'SUPER + M',             hl.dsp.window.fullscreen { mode = 'maximized' } },
     { 'SUPER + SHIFT + M',     hl.dsp.window.fullscreen { mode = 'fullscreen' } },
     -- Floating
-    { 'SUPER + F',             helpers.toggle_float }, -- Function floats and centres a window (or tiles if floating)
+    { 'SUPER + F',             helpers.toggle_float },
     -- Cycle visible
     { 'ALT + TAB',             helpers.cycle_visible },
     -- Mouse
