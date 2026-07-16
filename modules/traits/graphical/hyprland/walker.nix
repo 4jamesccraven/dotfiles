@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 /*
   ====[ Walker ]====
@@ -9,6 +14,7 @@
   config = lib.mkIf config.hyprland.enable {
     home-manager.users.jamescraven = {
       services.elephant.enable = true;
+
       services.walker = {
         enable = true;
         systemd.enable = true;
@@ -22,6 +28,47 @@
               "ctrl 4"
             ];
           };
+
+          providers.prefixes = [
+            # keep-sorted start block=yes
+            {
+              prefix = "!!";
+              provider = "providerlist";
+            }
+            {
+              prefix = "!c";
+              provider = "clipboard";
+            }
+            {
+              prefix = "!e";
+              provider = "symbols";
+            }
+            {
+              prefix = "!f";
+              provider = "files";
+            }
+            {
+              prefix = "!r";
+              provider = "runner";
+            }
+            {
+              prefix = "!u";
+              provider = "unicode";
+            }
+            {
+              prefix = "!win";
+              provider = "windows";
+            }
+            {
+              prefix = "@";
+              provider = "websearch";
+            }
+            {
+              prefix = "__";
+              provider = "todo";
+            }
+            # keep-sorted end
+          ];
         };
 
         theme = {
@@ -223,6 +270,57 @@
           '';
         };
       };
+
+      xdg.configFile."elephant/websearch.toml".source =
+        let
+          tomlFmt = pkgs.formats.toml { };
+        in
+        tomlFmt.generate "websearch.toml" {
+          entries = [
+            # keep-sorted start block=yes
+            {
+              default = true;
+              name = "Google";
+              url = "https://www.google.com/search?q=%TERM%";
+            }
+            {
+              name = "Noogle";
+              prefix = "!ng ";
+              url = "https://noogle.dev/q/?term=%TERM%";
+            }
+            {
+              name = "Satisfactory Wiki";
+              prefix = "!sf ";
+              url = "https://satisfactory.wiki.gg/wiki/Special:Search?search=%TERM%";
+            }
+            {
+              name = "Terarria Wiki";
+              prefix = "!tr ";
+              url = "https://terraria.wiki.gg/wiki/Special:Search?search=%TERM%";
+            }
+            {
+              name = "Warframe Wiki";
+              prefix = "!wf ";
+              url = "https://wiki.warframe.com/?search=%TERM%";
+            }
+            {
+              name = "Wikipedia";
+              prefix = "!w ";
+              url = "https://en.wikipedia.org/w/index.php?search=%TERM%";
+            }
+            {
+              name = "Wiktionary";
+              prefix = "!wt ";
+              url = "https://en.wiktionary.org/w/index.php?search=%TERM%";
+            }
+            {
+              name = "YouTube";
+              prefix = "!yt ";
+              url = "https://www.youtube.com/results?search_query=%TERM%";
+            }
+            # keep-sorted end
+          ];
+        };
     };
   };
 }
