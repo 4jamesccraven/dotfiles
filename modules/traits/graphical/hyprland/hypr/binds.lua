@@ -6,7 +6,7 @@ local term = require 'generated.terminal'
 local binds = {
     -- :> General
     { 'SUPER + E',             'nautilus',                                         { cmd = true, } },
-    { 'ALT + Space',           'fuzzel',                                           { cmd = true, } },
+    { 'ALT + Space',           'walker',                                           { cmd = true, } },
     { 'SUPER + Return',        term.name,                                          { cmd = true, } },
     { 'CTRL + SHIFT + Escape', term.run_in_term .. ' btop',                        { cmd = true, } },
     { 'XF86Calculator',        'qalculate-gtk',                                    { cmd = true, } },

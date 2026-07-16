@@ -13,10 +13,11 @@
 {
   imports = [
     # keep-sorted start
-    ./fuzzel.nix
+    # ./fuzzel.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./quickshell.nix
+    ./walker.nix
     # keep-sorted end
   ];
 
