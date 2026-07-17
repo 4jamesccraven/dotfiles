@@ -14,43 +14,57 @@ Item {
 
     Pill {
         color: Theme.mantle
-    }
 
-    Column {
-        id: column
-        anchors.centerIn: parent
-        spacing: 6
+        Column {
+            id: column
+            anchors.centerIn: parent
+            spacing: 6
 
-        Repeater {
-            model: 10
+            Repeater {
+                model: 10
 
-            Item {
-                required property int index
-                readonly property int wsNumber: index + 1
-                readonly property var ws: Hyprland.workspaces.values.find(w => w.id === wsNumber)
-                readonly property bool occupied: ws !== undefined
-                readonly property bool focused: ws !== undefined && ws.focused
+                Item {
+                    required property int index
+                    readonly property int wsNumber: index + 1
+                    readonly property var ws: Hyprland.workspaces.values.find(w => w.id === wsNumber)
+                    readonly property bool occupied: ws !== undefined
+                    readonly property bool focused: ws !== undefined && ws.focused
 
-                implicitWidth: 12
-                implicitHeight: 12
+                    implicitWidth: 12
+                    implicitHeight: 12
 
-                Rectangle {
-                    anchors.fill: parent
-                    radius: width / 2
-                    color: focused ? Theme.accent : "transparent"
-                    border.color: mouseArea.containsMouse ? Theme.text
-                        : (focused || occupied) ? Theme.accent
-                        : Theme.surface2
-                    border.width: 1.5
-                }
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: width / 2
+                        color: focused ? Theme.accent : "transparent"
+                        border.color: mouseArea.containsMouse ? Theme.overlay2
+                            : (focused || occupied) ? Theme.accent
+                            : Theme.surface2
+                        border.width: 1.5
+                    }
 
-                MouseArea {
-                    id: mouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: Hyprland.dispatch(`hl.dsp.focus { workspace = ${wsNumber} }`)
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: Hyprland.dispatch(`hl.dsp.focus { workspace = ${wsNumber} }`)
+                    }
                 }
             }
         }
+
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            onWheel: (wheel) => {
+                const currentWs = Hyprland.workspaces.values.find(w => w.focused).id
+                const nextWs = wheel.angleDelta.y > 0 ? currentWs + 1
+                    : (currentWs > 2) ? currentWs - 1 : 9
+                const nextClamped = nextWs % 10
+
+                Hyprland.dispatch(`hl.dsp.focus { workspace = ${nextClamped} }`)
+            }
+        }
     }
+
 }
