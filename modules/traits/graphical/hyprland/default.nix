@@ -49,16 +49,6 @@
       in
       { config, ... }:
       {
-        # :> Hook in other systemd user units from hm
-        systemd.user.targets.hyprland-session = {
-          Unit = {
-            Description = "Hyprland session";
-            BindsTo = [ "graphical-session.target" ];
-            Wants = [ "graphical-session-pre.target" ];
-            After = [ "graphical-session-pre.target" ];
-          };
-        };
-
         # Stub to point hyprland to the config subdirectory.
         xdg.configFile."hypr/hyprland.lua".text = /* lua */ ''
           require 'config'
