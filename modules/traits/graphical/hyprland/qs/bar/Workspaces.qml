@@ -59,7 +59,7 @@ Item {
             onWheel: (wheel) => {
                 const currentWs = Hyprland.workspaces.values.find(w => w.focused).id
                 const nextWs = wheel.angleDelta.y > 0 ? currentWs + 1
-                    : (currentWs > 2) ? currentWs - 1 : 9
+                    : (currentWs > 1) ? currentWs - 1 : 9
                 const nextClamped = nextWs % 10
 
                 Hyprland.dispatch(`hl.dsp.focus { workspace = ${nextClamped} }`)
