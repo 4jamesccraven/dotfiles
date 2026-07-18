@@ -57,12 +57,15 @@ Item {
             anchors.fill: parent
             acceptedButtons: Qt.NoButton
             onWheel: (wheel) => {
-                const currentWs = Hyprland.workspaces.values.find(w => w.focused).id
-                const nextWs = wheel.angleDelta.y > 0 ? currentWs + 1
-                    : (currentWs > 1) ? currentWs - 1 : 9
-                const nextClamped = nextWs % 10
+                function wrapAdd(value, delta) {
+                    return ((value - 1 + delta) % 10 + 10) % 10 + 1;
+                }
 
-                Hyprland.dispatch(`hl.dsp.focus { workspace = ${nextClamped} }`)
+                const current = Hyprland.workspaces.values.find(w => w.focused).id;
+                const up = wheel.angleDelta.y > 0;
+                const next = wrapAdd(current, up ? 1 : -1)
+
+                Hyprland.dispatch(`hl.dsp.focus { workspace = ${next} }`)
             }
         }
     }
