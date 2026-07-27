@@ -37,7 +37,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "nvim": {
-      "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
+      "rev": "79e2049a0fdf7ec840f8463fe1d962c94493196b",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-autopairs": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "2c227d59589957fa4404b7de5f61d72c0a78a62d",
+      "rev": "7ab79bb1b57160a537f427ac8a6026102f12b701",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -57,11 +57,11 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "61df84986b4b4ec469ee745a182e433d49f8c27e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "09d1324e264c6950262dbe02a9bce2933a6800db",
+      "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -77,7 +77,7 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "typst-preview.nvim": {
-      "rev": "87db18b8d19c8b0eed399f52e4c527ce5afe4817",
+      "rev": "1c2e19486397be1c580b560fc50ee36abe329c46",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     },
     "vim-visual-increment": {
@@ -85,7 +85,7 @@
       "src": "https://github.com/triglav/vim-visual-increment"
     },
     "yazi.nvim": {
-      "rev": "d06c6c7a2e06f847963f5f14542feda1ca3872e0",
+      "rev": "840b9792a6ec97afce384f6821e64409510d6246",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
