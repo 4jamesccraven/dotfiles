@@ -40,7 +40,10 @@ Singleton {
         `]
         workingDirectory: repoPath
         stdout: StdioCollector {
-            onStreamFinished: root.daysSinceUpdate = parseInt(this.text.trim()) || -1
+            onStreamFinished: {
+                const days = Number(this.text.trim())
+                root.daysSinceUpdate = Number.isNan(days) ? -1 : days
+            }
         }
     }
 
