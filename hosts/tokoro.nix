@@ -15,12 +15,14 @@
   - Server
   - Syncthing
   - Jellyfin
+  - Kavita
 */
 {
   # ---[ Host ]---
   imports = [
     # keep-sorted start
     ../modules/traits/jellyfin-service.nix
+    ../modules/traits/kavita.nix
     ../modules/traits/server.nix
     ../modules/traits/syncthing.nix
     # keep-sorted end

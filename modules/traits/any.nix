@@ -37,6 +37,7 @@
     shell = pkgs.zsh;
     extraGroups = [
       "jellyfin"
+      "kavita"
       "networkmanager"
       "wheel"
     ];
