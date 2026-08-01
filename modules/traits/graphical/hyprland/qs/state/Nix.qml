@@ -42,7 +42,7 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 const days = Number(this.text.trim())
-                root.daysSinceUpdate = Number.isNan(days) ? -1 : days
+                root.daysSinceUpdate = Number.isNaN(days) ? -1 : days
             }
         }
     }
