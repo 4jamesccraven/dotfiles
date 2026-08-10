@@ -17,17 +17,17 @@ PopupWrapper {
 
         ShellButton {
             text: "Logout"
-            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Logging Out...\"'"]
+            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Logging Out…\"'"]
         }
 
         ShellButton {
             text: "Shutdown"
-            command: ["shutdown", "now"]
+            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Shutting Down…\" -p \"shutdown now\"'"]
         }
 
         ShellButton {
             text: "Reboot"
-            command: ["reboot"]
+            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Rebooting…\" -p reboot'"]
         }
     }
 }
