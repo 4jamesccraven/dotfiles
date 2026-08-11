@@ -22,7 +22,7 @@ local float_generic = {
     -- Steam
     { class = 'steam',                     title = 'Steam', },
     -- Standalone apps
-    { class = '.blueman-manager-wrapped',  title = 'Bluetooth Devices', },
+    { class = 'blueman-manager',           title = 'Bluetooth Devices', },
     { class = 'org.gnome.Nautilus' },
     { class = 'org.telegram.desktop' },
     { class = 'org.pulseaudio.pavucontrol' },
