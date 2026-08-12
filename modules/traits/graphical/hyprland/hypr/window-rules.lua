@@ -10,6 +10,11 @@ for _, props in ipairs(steam_props) do
 end
 
 hl.window_rule {
+    match = { class = 'vlc' },
+    opaque = true,
+}
+
+hl.window_rule {
     match = { tag = 'game' },
     workspace = '1',
     fullscreen = true,
