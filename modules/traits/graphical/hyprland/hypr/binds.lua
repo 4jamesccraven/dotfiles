@@ -27,6 +27,8 @@ local binds = {
     { 'SUPER + SHIFT + M',     hl.dsp.window.fullscreen { mode = 'fullscreen' } },
     -- Floating
     { 'SUPER + F',             helpers.toggle_float },
+    -- Toggle Split direction
+    { 'SUPER + backslash',     hl.dsp.layout('togglesplit') },
     -- Cycle visible
     { 'ALT + TAB',             helpers.cycle_visible },
     -- Mouse
