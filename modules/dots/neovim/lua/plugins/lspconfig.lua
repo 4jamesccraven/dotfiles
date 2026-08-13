@@ -3,6 +3,7 @@ return {
     repo = 'nvim-lspconfig',
     config = function()
         local map = require 'config.map'
+        local hostname = require 'config.hostname'
         local servers = {
             -- Always Installed
             bashls = true,
@@ -11,9 +12,24 @@ return {
             rust_analyzer = true,
             nixd = {
                 settings = {
-                    formatting = {
-                        command = { "nixfmt" },
-                    },
+                    nixd = {
+                        formatting = {
+                            command = { 'nixfmt' }
+                        },
+                        nixpkgs = {
+                            expr = 'import <nixpkgs> { }'
+                        },
+                        options = {
+                            nixos = {
+                                expr = '(builtins.getFlake (toString ./.)).nixosConfigurations.' ..
+                                    hostname .. '.options',
+                            },
+                            home_manager = {
+                                expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.' ..
+                                    hostname .. '.options.home-manager.users.type.getSubOptions []',
+                            },
+                        }
+                    }
                 }
             },
             tinymist = {
