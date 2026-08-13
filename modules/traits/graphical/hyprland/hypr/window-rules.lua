@@ -1,5 +1,5 @@
 local steam_props = {
-    { class = '^(steam_app_\\d+)$' },
+    { class = '^(steam_app_\\d+)$', title = 'negative:Warframe' },
     { class = '^(gamescope)$' },
     { class = '^(steam_proton)$' },
     { xdg_tag = 'proton-game' }
