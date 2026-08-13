@@ -1,5 +1,6 @@
 alias b := build
 alias c := clean
+alias gu := pull
 
 [private]
 default:
@@ -13,8 +14,7 @@ build: validate
 
 # Pull upstream changes and build
 [group('System State')]
-sync: validate && build
-    @git pull
+sync: validate pull build
 
 # Pull upstream changes, build, and clean
 [group('System State')]
@@ -27,9 +27,13 @@ clean *extra-args='--no-gcroots --optimise': validate && build
 
 # Update the system
 [group('System State')]
-update *inputs: validate && build
-    @git pull
+update *inputs: validate pull && build
     @nix flake update {{ inputs }}
+
+# List available generation
+[group('System State')]
+info:
+    @nh os info
 
 # ---[ Version Control ]---
 # Revert the system to HEAD
@@ -44,6 +48,10 @@ push message="chore: system update":
     @git commit -m '{{ message }}'
     @git push origin HEAD
 
+# Git pull
+[group('VCS')]
+pull:
+    @git pull
 
 # ---[ Helpers ]---
 [private]
