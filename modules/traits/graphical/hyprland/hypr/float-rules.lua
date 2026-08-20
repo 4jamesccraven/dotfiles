@@ -61,6 +61,7 @@ local function floating_window(match, size)
         float = true,
         center = true,
         size = size or STD_SIZE,
+        fullscreen = false,
     }
 end
 
