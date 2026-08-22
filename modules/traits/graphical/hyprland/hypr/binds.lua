@@ -1,8 +1,8 @@
 local helpers = require 'config.bind-helpers'
 local term = require 'generated.terminal'
 
----@alias JCC.Bind [string, string|function|HL.Dispatcher, JCC.BindOpts?]
----@type JCC.Bind[]
+---@alias HLX.Bind [string, string|function|HL.Dispatcher, HLX.BindOpts?]
+---@type HLX.Bind[]
 local binds = {
     -- :> General
     { 'SUPER + E',             'nautilus',                                         { cmd = true, } },

@@ -1,7 +1,7 @@
----@class JCC.BindHelpers
+---@class HLX.BindHelpers
 local M = {}
 
----@class JCC.BindOpts
+---@class HLX.BindOpts
 ---@field cmd? boolean
 ---@field passthru? HL.BindOptions
 ---@field media? boolean
@@ -9,7 +9,7 @@ local M = {}
 ---A helper to make a Hyprland bind.
 ---@param keys string The keys for the keybind
 ---@param dispatcher string|function|HL.Dispatcher What happens when the bind is activated
----@param opts? JCC.BindOpts Additional options
+---@param opts? HLX.BindOpts Additional options
 ---@return nil
 function M.bind(keys, dispatcher, opts)
     opts = opts or {}
@@ -89,5 +89,5 @@ function M.toggle_float()
     end
 end
 
----@class JCC.BindHelpers
+---@class HLX.BindHelpers
 return M

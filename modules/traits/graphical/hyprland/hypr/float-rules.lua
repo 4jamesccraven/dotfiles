@@ -44,6 +44,10 @@ local float_custom = {
         size = std_size(0.6),
     },
     {
+        match = { class = 'steam', title = 'Recordings & Screenshots', },
+        size = std_size(1.5),
+    },
+    {
         match = { class = 'qalculate-gtk', title = 'Qalculate!' },
         size = { 800, 250 }
     }
