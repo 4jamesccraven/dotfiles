@@ -3,7 +3,7 @@ return {
     repo = 'nvim-treesitter',
     immediate = true,
     config = function()
-        vim.api.nvim_create_autocmd("FileType", {
+        vim.api.nvim_create_autocmd('FileType', {
             pattern = "*",
             callback = function(event)
                 require 'nvim-treesitter'.install { 'all' }
