@@ -48,6 +48,11 @@
 --     end
 -- }
 -- ```
+-- # Updating Plugins
+-- yap exposes two user commands:
+-- - `:PackUpdate`: updates currently installed plugins using `vim.pack`
+-- - `:PackSync`: also updates plugins, but doesn't change the lockfile. Useful
+--     for multi-system configs.
 local M = {}
 
 -- USER COMMANDS
