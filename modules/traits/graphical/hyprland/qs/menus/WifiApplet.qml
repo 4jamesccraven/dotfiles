@@ -90,7 +90,8 @@ PopupWrapper {
                 Rectangle {
                     anchors.fill: parent
                     radius: 8
-                    color: mouseArea.containsMouse || modelData.ssid === root.selectedSsid ? Theme.mantle : "transparent"
+                    color: mouseArea.containsMouse || modelData.ssid === root.selectedSsid
+                        ? Theme.mantle : "transparent"
 
                     Behavior on color {
                         ColorAnimation { duration: 100 }

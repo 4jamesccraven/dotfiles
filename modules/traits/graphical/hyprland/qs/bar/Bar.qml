@@ -42,7 +42,7 @@ PanelWindow {
             Bluetooth {}
             NetworkButton {
                 onClicked: {
-                    if (Network.ethernetConnected) return
+                    // if (Network.ethernetConnected) return
                     if (!networkShown) Network.refreshNetworks()
                     networkShown = !networkShown
                 }
