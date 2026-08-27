@@ -61,6 +61,7 @@ PanelWindow {
                 monitor: root.monitor
             }
             NixIndicator {}
+            LockButton {}
         }
 
         // Modules bottom
