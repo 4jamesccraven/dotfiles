@@ -25,7 +25,7 @@ in
 
     home.shellAliases = {
       cat = "bat";
-      lsblk = "lsblk | bat -l conf -pp";
+      lsblk = "lsblk | bat -l tcl -pp"; # Gives pseudo-syntax highlighting to lsblk
     };
   };
 }
