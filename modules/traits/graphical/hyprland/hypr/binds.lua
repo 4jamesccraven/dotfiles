@@ -5,19 +5,19 @@ local term = require 'generated.terminal'
 ---@type HLX.Bind[]
 local binds = {
     -- :> General
-    { 'SUPER + E',             'nautilus',                                         { cmd = true, } },
-    { 'ALT + Space',           'walker',                                           { cmd = true, } },
-    { 'SUPER + Return',        term.name,                                          { cmd = true, } },
-    { 'CTRL + SHIFT + Escape', term.run_in_term .. ' btop',                        { cmd = true, } },
-    { 'XF86Calculator',        'qalculate-gtk',                                    { cmd = true, } },
+    { 'SUPER + E',             'nautilus',                                                   { cmd = true, } },
+    { 'ALT + Space',           'walker',                                                     { cmd = true, } },
+    { 'SUPER + Return',        term.name,                                                    { cmd = true, } },
+    { 'CTRL + SHIFT + Escape', term.run_in_term .. ' btop',                                  { cmd = true, } },
+    { 'XF86Calculator',        'qalculate-gtk',                                              { cmd = true, } },
     -- Power/Session control
-    { 'SUPER + L',             'hyprlock',                                         { cmd = true, } },
-    { 'SUPER + V',             'hyprshutdown',                                     { cmd = true, } },
-    { 'SUPER + SHIFT + V',     'shutdown now',                                     { cmd = true, } },
-    { 'switch:on:Lid Switch',  'hyprlock',                                         { cmd = true, locked = true } },
+    { 'SUPER + L',             'hyprlock',                                                   { cmd = true, } },
+    { 'SUPER + V',             'hyprshutdown',                                               { cmd = true, } },
+    { 'SUPER + SHIFT + V',     'shutdown now',                                               { cmd = true, } },
+    { 'switch:on:Lid Switch',  'hyprlock',                                                   { cmd = true, locked = true } },
     -- Screenshots
-    { 'Print',                 'screenie',                                         { cmd = true, } },
-    { 'SHIFT + Print',         'screenie output',                                  { cmd = true, } },
+    { 'Print',                 'screenie',                                                   { cmd = true, } },
+    { 'SHIFT + Print',         'screenie output',                                            { cmd = true, } },
 
     -- :> Window Control
     -- Close window
@@ -27,21 +27,23 @@ local binds = {
     { 'SUPER + SHIFT + M',     hl.dsp.window.fullscreen { mode = 'fullscreen' } },
     -- Floating
     { 'SUPER + F',             helpers.toggle_float },
+    -- Opacity
+    { 'SUPER + O',             hl.dsp.window.set_prop { prop = 'opaque', value = 'toggle', } },
     -- Toggle Split direction
     { 'SUPER + backslash',     hl.dsp.layout('togglesplit') },
     -- Cycle visible
     { 'ALT + TAB',             helpers.cycle_visible },
     -- Mouse
-    { 'SUPER + mouse:272',     hl.dsp.window.drag(),                               { passthru = { mouse = true, } } },
-    { 'SUPER + mouse:273',     hl.dsp.window.resize(),                             { passthru = { mouse = true, } } },
+    { 'SUPER + mouse:272',     hl.dsp.window.drag(),                                         { passthru = { mouse = true, } } },
+    { 'SUPER + mouse:273',     hl.dsp.window.resize(),                                       { passthru = { mouse = true, } } },
 
     -- :> Media keys
-    { 'XF86AudioRaiseVolume',  'wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+', { cmd = true, media = true, } },
-    { 'XF86AudioLowerVolume',  'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-',        { cmd = true, media = true, } },
-    { 'XF86AudioMute',         'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle',       { cmd = true, media = true, } },
-    { 'XF86AudioMicMute',      'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle',     { cmd = true, media = true, } },
-    { 'XF86MonBrightnessDown', 'brightnessctl set 10%-',                           { cmd = true, media = true, } },
-    { 'XF86MonBrightnessUp',   'brightnessctl set 10%+',                           { cmd = true, media = true, } },
+    { 'XF86AudioRaiseVolume',  'wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+',           { cmd = true, media = true, } },
+    { 'XF86AudioLowerVolume',  'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-',                  { cmd = true, media = true, } },
+    { 'XF86AudioMute',         'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle',                 { cmd = true, media = true, } },
+    { 'XF86AudioMicMute',      'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle',               { cmd = true, media = true, } },
+    { 'XF86MonBrightnessDown', 'brightnessctl set 10%-',                                     { cmd = true, media = true, } },
+    { 'XF86MonBrightnessUp',   'brightnessctl set 10%+',                                     { cmd = true, media = true, } },
 }
 for _, b in ipairs(binds) do
     helpers.bind(b[1], b[2], b[3])

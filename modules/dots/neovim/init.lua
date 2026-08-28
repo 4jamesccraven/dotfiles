@@ -3,7 +3,7 @@ vim.loader.enable()
 
 -- Generic Config
 require 'config.interface'
-require 'config.binds'
+require 'config.keybinds'
 
 -- Plugins, see `/lua/yap.lua`
 require 'yap'.setup()
