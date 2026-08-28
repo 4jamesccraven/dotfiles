@@ -78,10 +78,12 @@ function M.toggle_float()
         local mon = hl.get_active_monitor()
         if not mon then return end
 
-        local scale_factor = 0.65 -- Scale factor for floating size.
+        local scale_factor = 0.75 -- Scale factor for floating size.
+        local height = scale_factor * mon.height
+        local width = height / 9 * 16
         hl.dispatch(hl.dsp.window.resize {
-            x = mon.width * scale_factor,
-            y = mon.height * scale_factor,
+            x = width,
+            y = height,
             relative = false,
         })
 
