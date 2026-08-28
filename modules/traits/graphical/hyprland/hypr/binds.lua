@@ -33,6 +33,8 @@ local binds = {
     { 'SUPER + backslash',     hl.dsp.layout('togglesplit') },
     -- Cycle visible
     { 'ALT + TAB',             helpers.cycle_visible },
+    -- Minimise window
+    { 'SUPER + Z',             helpers.toggle_minimised },
     -- Mouse
     { 'SUPER + mouse:272',     hl.dsp.window.drag(),                                         { passthru = { mouse = true, } } },
     { 'SUPER + mouse:273',     hl.dsp.window.resize(),                                       { passthru = { mouse = true, } } },

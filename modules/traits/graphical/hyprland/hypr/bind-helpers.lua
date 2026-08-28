@@ -91,5 +91,24 @@ function M.toggle_float()
     end
 end
 
+---Emulates minimising a window by moving it to a special workspace and back.
+---@return nil
+function M.toggle_minimised()
+    local special_ws = 'special:minimised'
+    local ws = hl.get_workspace(special_ws)
+
+    if ws and ws.windows > 0 then
+        hl.dispatch(hl.dsp.workspace.toggle_special('minimised'))
+        hl.dispatch(hl.dsp.window.move {
+            workspace = '+0',
+        })
+    else
+        hl.dispatch(hl.dsp.window.move {
+            workspace = special_ws,
+            follow = false,
+        })
+    end
+end
+
 ---@class HLX.BindHelpers
 return M
