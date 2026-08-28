@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "egress": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1787946886,
+        "narHash": "sha256-AQrmfEwboHyGwrEeyT3sQNGCxXQSr3KWXtBIcYWwFH0=",
+        "owner": "4jamesccraven",
+        "repo": "egress",
+        "rev": "0223c48499a94c9ff8e5f4eb64eaa4901b1ae476",
+        "type": "github"
+      },
+      "original": {
+        "owner": "4jamesccraven",
+        "repo": "egress",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -60,7 +78,7 @@
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1784642409,
@@ -79,6 +97,19 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1787172299,
+        "narHash": "sha256-LS/aXgJh+/1UgtrOxdS5Wum/PgmQYa1AMFZHdH+xGyo=",
+        "rev": "07e1d92cdc0ed416cfa11ff3ca40d17e61cfba7a",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1058374.07e1d92cdc0e/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1783776592,
         "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
         "owner": "NixOS",
@@ -93,7 +124,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1787394516,
         "narHash": "sha256-wS+SNrj0wobAXQONggzrpetnZ9E0FL7l0WVWDRQ77Sc=",
@@ -128,10 +159,11 @@
     },
     "root": {
       "inputs": {
+        "egress": "egress",
         "home-manager": "home-manager",
         "mkdev": "mkdev",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "ns": "ns"
       }
     }

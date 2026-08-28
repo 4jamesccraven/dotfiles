@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   modulesPath,
@@ -20,6 +21,7 @@
 {
   # ---[ Host ]---
   imports = [
+    inputs.egress.nixosModules.default
     # keep-sorted start
     ../modules/traits/jellyfin-service.nix
     ../modules/traits/kavita.nix
@@ -47,6 +49,11 @@
     compression = "lz4";
     startAt = "daily";
   };
+
+  # :> Getting spied on
+  services.egressd.enable = true;
+  users.users.jamescraven.extraGroups = [ "egress" ];
+  networking.firewall.allowedTCPPorts = [ 50925 ];
 
   # ---[ Hardware ]---
   boot.initrd.availableKernelModules = [

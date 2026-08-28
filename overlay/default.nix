@@ -16,6 +16,7 @@ in
     # :> mkdev
     inputs.mkdev.overlays.default
     inputs.ns.overlays.default
+    inputs.egress.overlays.default
 
     # :> etc
     (_final: prev: {

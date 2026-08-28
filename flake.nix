@@ -21,6 +21,9 @@
       url = "github:4jamesccraven/ns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    egress = {
+      url = "github:4jamesccraven/egress"; # Intentionally no "follows" due to future warning
+    };
   };
 
   outputs =
