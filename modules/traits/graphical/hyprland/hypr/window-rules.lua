@@ -26,3 +26,9 @@ hl.window_rule {
     no_blur = true,
     opaque = true,
 }
+
+hl.window_rule {
+    match = { class = '.virt-manager-wrapped', },
+    no_blur = true,
+    opaque = true,
+}
