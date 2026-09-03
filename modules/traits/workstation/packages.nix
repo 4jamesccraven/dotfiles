@@ -120,6 +120,7 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       # keep-sorted start
+      adwaita-fonts
       corefonts
       liberation_ttf
       nerd-fonts.fira-code
