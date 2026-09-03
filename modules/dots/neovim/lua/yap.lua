@@ -85,7 +85,7 @@ local function init_user_commands()
 
     -- Sync to the lockfile.
     vim.api.nvim_create_user_command('PackSync', function()
-        vim.pack.update(nil, { target = 'lockfile' })
+        vim.pack.update(nil, { target = 'lockfile', force = true, })
     end, {})
 end
 

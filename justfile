@@ -15,6 +15,7 @@ build: validate
 # Pull upstream changes and build
 [group('System State')]
 sync: validate pull build
+    @nvim -c 'PackSync' -c 'q'
 
 # Pull upstream changes, build, and clean
 [group('System State')]
@@ -27,8 +28,12 @@ clean *extra-args='--no-gcroots --optimise': validate && build
 
 # Update the system
 [group('System State')]
-update *inputs: validate pull && build
+update *inputs: validate pull && build update-nvim
     @nix flake update {{ inputs }}
+
+# Update nvim plugins
+update-nvim:
+    @nvim -c 'PackUpdate' -c 'wq'
 
 # List available generation
 [group('System State')]
