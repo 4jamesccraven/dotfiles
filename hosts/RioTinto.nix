@@ -30,6 +30,8 @@
 
   networking.hostName = "RioTinto";
 
+  environment.systemPackages = with pkgs; [ makemkv ];
+
   # :> Graphical Settings
   gnome.enable = true;
   hyprland.enable = true;

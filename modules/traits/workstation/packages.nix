@@ -23,7 +23,6 @@
 
     # :> Media
     foliate
-    # makemkv -- currently down
     obs-studio
     vlc
 
