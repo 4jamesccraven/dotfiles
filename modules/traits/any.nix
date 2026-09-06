@@ -57,7 +57,7 @@
       inherit (config.ext) flakeRoot;
 
       /*
-        echoPkgs :: package -> string
+        echoPkg :: package -> string
         Creates a string which echos a package name into /dev/null.
       */
       echoPkg = pkg: "echo \"${pkg}\" > /dev/null";

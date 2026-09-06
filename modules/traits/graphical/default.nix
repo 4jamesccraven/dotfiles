@@ -13,8 +13,8 @@
       xdg desktop portal => Facilitates file dialogs etc.
 
       :> Config Level
-      hyprland => Enablable NixOS module for hyprland
-      gnome    => Enablable NixOS module for GNOME
+      hyprland           => Enablable NixOS module for hyprland
+      gnome              => Enablable NixOS module for GNOME
 */
 {
   imports = [
