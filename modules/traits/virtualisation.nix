@@ -32,11 +32,7 @@
       enable = true;
       dockerCompat = true;
     };
-    # This was supposed to be set by default but isn't for some reason...
-    containers.registries.search = [
-      "docker.io"
-      "quay.io"
-    ];
+    containers.registries.settings.unqualified-search-registries = [ "docker.io" ];
   };
   environment.systemPackages = [ pkgs.distrobox ];
 
