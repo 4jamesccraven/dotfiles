@@ -27,17 +27,24 @@
   programs.virt-manager.enable = true;
 
   # ---[ Containerisation ]---
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+    # This was supposed to be set by default but isn't for some reason...
+    containers.registries.search = [
+      "docker.io"
+      "quay.io"
+    ];
+  };
   environment.systemPackages = [ pkgs.distrobox ];
 
   # ---[ Group Management ]---
   # Make each user a member of each of `groups`.
   users.groups =
     let
-      groups = [
-        "docker"
-        "libvirtd"
-      ];
+      groups = [ "libvirtd" ];
       users = [ "jamescraven" ];
     in
     lib.genAttrs groups (_: {
