@@ -31,7 +31,13 @@ clean *extra-args='--no-gcroots --optimise': validate && build
 update *inputs: validate pull && build update-nvim
     @nix flake update {{ inputs }}
 
+# Rebuild the system and activate on next boot.
+[group('System State')]
+boot: validate
+    @nh os boot .
+
 # Update nvim plugins
+[group('Neovim')]
 update-nvim:
     @nvim -c 'PackUpdate' -c 'wq'
 
