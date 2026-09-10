@@ -28,14 +28,14 @@ let
 
   # :> Final theme value
   # Convert the theme to nix values
-  theme = builtins.fromTOML (builtins.readFile themeFile) // {
+  theme = fromTOML (builtins.readFile themeFile) // {
     # Patch in the bat theme file for the previewer pane
     mgr.syntect_theme = "${syntaxFile}";
   };
 in
 {
   # Hack to prevent the theme file from being garbage collected.
-  system.activationScripts.cachYaziSource.text = ''
+  system.activationScripts.cacheYaziSource.text = /* bash */ ''
     echo "${themeFile}" > /dev/null
   '';
 
