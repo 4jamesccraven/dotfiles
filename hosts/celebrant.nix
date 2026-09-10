@@ -24,11 +24,6 @@
   networking.hostName = "celebrant";
 
   # ---[ Graphical Settings ]---
-  services.displayManager = {
-    gdm.enable = lib.mkForce false;
-    cosmic-greeter.enable = true;
-  };
-
   ext.hyprland = {
     enable = true;
     localConfig = /* lua */ ''

@@ -25,8 +25,8 @@
     enable = lib.mkEnableOption "Enable Hyprland";
     localConfig = lib.mkOption {
       description = "Host specific config to be linked to the path `generated/local.lua`.";
-      default = "";
       type = lib.types.str;
+      default = "";
       example = /* lua */ ''
         hl.on('hyprland.start', function()
             hl.exec_cmd 'openrgb -p main'
