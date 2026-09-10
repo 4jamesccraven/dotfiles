@@ -53,7 +53,7 @@ with colourVars;
 
             {
               monitor = "";
-              text = "cmd[update:1000] echo $(date '+%a %B %d')";
+              text = "cmd[update:1000] echo $(date '+%a, %d %B')";
               font_size = 25;
               inherit font_family;
 
