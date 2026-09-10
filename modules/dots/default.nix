@@ -22,6 +22,7 @@
     ./starship.nix
     ./tealdeer.nix
     ./tmux.nix
+    ./tty.nix
     ./yazi.nix
     ./zsh.nix
     # keep-sorted end
