@@ -33,49 +33,51 @@
   environment.systemPackages = with pkgs; [ makemkv ];
 
   # :> Graphical Settings
-  gnome.enable = true;
-  hyprland.enable = true;
-  home-manager.users.jamescraven = {
-    xdg.configFile."hypr/generated/local.lua".text = /* lua */ ''
-      hl.on('hyprland.start', function()
-          hl.exec_cmd 'openrgb -p main'
-          hl.exec_cmd '${pkgs.xrandr}/bin/xrandr --output DP-3 --primary'
-          hl.exec_cmd 'steam -silent'
-      end)
+  ext = {
+    gnome.enable = true;
+    hyprland = {
+      enable = true;
+      localConfig = /* lua */ ''
+        hl.on('hyprland.start', function()
+            hl.exec_cmd 'openrgb -p main'
+            hl.exec_cmd '${pkgs.xrandr}/bin/xrandr --output DP-3 --primary'
+            hl.exec_cmd 'steam -silent'
+        end)
 
-      hl.monitor {
-          output = 'DP-3',
-          mode = '2560x1080@75',
-          position = '0x0',
-          scale = '1.0',
-      }
+        hl.monitor {
+            output = 'DP-3',
+            mode = '2560x1080@75',
+            position = '0x0',
+            scale = '1.0',
+        }
 
-      hl.monitor {
-          output = 'HDMI-A-1',
-          mode = '1920x1080',
-          position = '320x-1080',
-          scale = '1.0',
-      }
+        hl.monitor {
+            output = 'HDMI-A-1',
+            mode = '1920x1080',
+            position = '320x-1080',
+            scale = '1.0',
+        }
 
-      hl.workspace_rule {
-          workspace = '1',
-          monitor = 'DP-3',
-          default = true,
-      }
+        hl.workspace_rule {
+            workspace = '1',
+            monitor = 'DP-3',
+            default = true,
+        }
 
-      hl.workspace_rule {
-          workspace = '6',
-          monitor = 'HDMI-A-1',
-          default = true,
-          persistent = true,
-          on_created_empty = 'brave',
-      }
+        hl.workspace_rule {
+            workspace = '6',
+            monitor = 'HDMI-A-1',
+            default = true,
+            persistent = true,
+            on_created_empty = 'brave',
+        }
 
-      for i = 1, 5 do
-          hl.workspace_rule { workspace = tostring(i),     monitor = 'DP-3'     }
-          hl.workspace_rule { workspace = tostring(i + 5), monitor = 'HDMI-A-1' }
-      end
-    '';
+        for i = 1, 5 do
+            hl.workspace_rule { workspace = tostring(i),     monitor = 'DP-3'     }
+            hl.workspace_rule { workspace = tostring(i + 5), monitor = 'HDMI-A-1' }
+        end
+      '';
+    };
   };
 
   # ---[ Hardware ] ---

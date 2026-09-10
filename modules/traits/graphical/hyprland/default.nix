@@ -21,11 +21,21 @@
     # keep-sorted end
   ];
 
-  options = {
-    hyprland.enable = lib.mkEnableOption "Enable Hyprland";
+  options.ext.hyprland = {
+    enable = lib.mkEnableOption "Enable Hyprland";
+    localConfig = lib.mkOption {
+      description = "Host specific config to be linked to the path `generated/local.lua`.";
+      default = "";
+      type = lib.types.str;
+      example = /* lua */ ''
+        hl.on('hyprland.start', function()
+            hl.exec_cmd 'openrgb -p main'
+        end
+      '';
+    };
   };
 
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf config.ext.hyprland.enable {
     # Enable in *NixOS*
     programs.hyprland = {
       enable = true;
@@ -44,10 +54,10 @@
     environment.pathsToLink = [ "/share/hypr" ];
 
     home-manager.users.jamescraven =
+      { ... }@hmArgs:
       let
-        cfg = config;
+        hmCfg = hmArgs.config;
       in
-      { config, ... }:
       {
         # Stub to point hyprland to the config subdirectory.
         xdg.configFile."hypr/hyprland.lua".text = /* lua */ ''
@@ -57,14 +67,16 @@
         # Symlink the actual config directory.
         xdg.configFile."hypr/config".source =
           let
-            inherit (config.home) homeDirectory;
+            inherit (hmCfg.home) homeDirectory;
           in
-          config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/nixos/modules/traits/graphical/hyprland/hypr";
+          hmCfg.lib.file.mkOutOfStoreSymlink "${homeDirectory}/nixos/modules/traits/graphical/hyprland/hypr";
+
+        xdg.configFile."hypr/generated/local.lua".text = config.ext.hyprland.localConfig;
 
         # Expose catppuccin as a lua table in the format hyprland likes to use.
         xdg.configFile."hypr/generated/theme.lua".text =
           let
-            inherit (cfg.ext) colours;
+            inherit (config.ext) colours;
             toHyprFunc = col: "rgb(${col.hex})";
             toHyprGrad = col: "rgba(${col.hex}ff)";
             luaDecl = name: val: "        [\"${name}\"] = '${val}',";
@@ -96,7 +108,7 @@
         # Expose the terminal config.
         xdg.configFile."hypr/generated/terminal.lua".text =
           let
-            inherit (cfg.ext) term;
+            inherit (config.ext) term;
             terminal = term.bin;
             runInTerm = term.runCmds;
           in

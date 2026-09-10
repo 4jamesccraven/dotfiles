@@ -23,11 +23,15 @@
 
   networking.hostName = "celebrant";
 
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
+  # ---[ Graphical Settings ]---
+  services.displayManager = {
+    gdm.enable = lib.mkForce false;
+    cosmic-greeter.enable = true;
+  };
 
-  hyprland.enable = true;
-  home-manager.users.jamescraven = {
-    xdg.configFile."hypr/generated/local.lua".text = /* lua */ ''
+  ext.hyprland = {
+    enable = true;
+    localConfig = /* lua */ ''
       hl.monitor {
           output = 'eDP-1',
           mode = '1920x1200',
@@ -52,12 +56,11 @@
     '';
   };
 
-  programs.steam.enable = true;
+  # :> Stay awake with lid closed if there's external power.
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
 
-  services.displayManager = {
-    gdm.enable = lib.mkForce false;
-    cosmic-greeter.enable = true;
-  };
+  # :> Steam without the extra stuff in the gaming module.
+  programs.steam.enable = true;
 
   # ---[ Hardware ]---
   boot.initrd.availableKernelModules = [

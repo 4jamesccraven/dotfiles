@@ -11,11 +11,11 @@
   Defines a module that enables and configures GNOME
 */
 {
-  options = {
+  options.ext = {
     gnome.enable = lib.mkEnableOption "Enables gnome";
   };
 
-  config = lib.mkIf config.gnome.enable {
+  config = lib.mkIf config.ext.gnome.enable {
     # ---[ Enable and Configure GNOME Base ]---
     services.desktopManager.gnome.enable = true;
     # Exclude unnecessary packages (i.e., bloat)

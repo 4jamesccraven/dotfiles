@@ -6,7 +6,7 @@
   Config for Fuzzel, an application launcher.
 */
 {
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf config.ext.hyprland.enable {
     home-manager.users.jamescraven =
       let
         inherit (config.ext) colours;

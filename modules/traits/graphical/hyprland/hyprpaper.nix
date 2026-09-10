@@ -6,7 +6,7 @@
   Config for hyprpaper, a wallpaper daemon for hyprland.
 */
 {
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf config.ext.hyprland.enable {
     home-manager.users.jamescraven = {
       services.hyprpaper = {
         enable = true;

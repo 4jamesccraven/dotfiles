@@ -11,7 +11,7 @@
   Config for Walker, an application launcher.
 */
 {
-  config = lib.mkIf config.hyprland.enable {
+  config = lib.mkIf config.ext.hyprland.enable {
     home-manager.users.jamescraven = {
       services.elephant.enable = true;
 

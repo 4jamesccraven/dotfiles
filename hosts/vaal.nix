@@ -30,14 +30,8 @@
   ];
 
   # :> Graphical Settings
-  hyprland.enable = true;
-  home-manager.users.jamescraven = {
-    wayland.windowManager.hyprland.settings = {
-      monitor = [
-        "eDP-1, 1920x1080, 0x0, 1.2"
-      ];
-    };
-  };
+  ext.hyprland.enable = true;
+  # home-manager.users.jamescraven = { wayland.windowManager.hyprland.settings = { monitor = [ "eDP-1, 1920x1080, 0x0, 1.2" ]; }; };
 
   # ---[ Hardware ]---
   boot.initrd.availableKernelModules = [
