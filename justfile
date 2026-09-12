@@ -23,9 +23,21 @@ sync: validate pull build
 adopt: sync clean
 
 # Clean unused store paths
+[arg('gcroots', long='gc-roots', value='true', help='Clean out old direnv stuff.')]
+[arg('help', long='help', short='h', value='true', help='Show this message and exit.')]
+[arg('optimise', long='no-optimise', value='false', help='Optimise the Nix store after cleaning.')]
 [group('System State')]
-clean *extra-args='--no-gcroots --optimise': validate && build
-    @nh clean all {{ extra-args }}
+clean optimise='true' gcroots='false' help='false': validate && build
+    #!/usr/bin/env bash
+    if [[ "{{ help }}" == "true" ]]; then
+        just --usage clean
+        exit 1 # Necessary to avoid moving on to build
+    fi
+
+    nh clean all \
+        {{ if optimise == "true" { "--optimise" } else { "" } }} \
+        {{ if gcroots == "true" { "" } else { "--no-gcroots" } }}
+
 
 # Update the system
 [group('System State')]
