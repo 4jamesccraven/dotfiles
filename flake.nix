@@ -6,23 +6,37 @@
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
 
     # :> nix-community
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
-      url = "github:nix-community/home-manager?ref=master";
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-wsl = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # :> me
     mkdev = {
-      url = "github:4jamesccraven/mkdev";
+      type = "github";
+      owner = "4jamesccraven";
+      repo = "mkdev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ns = {
-      url = "github:4jamesccraven/ns";
+      type = "github";
+      owner = "4jamesccraven";
+      repo = "ns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     egress = {
-      url = "github:4jamesccraven/egress"; # Intentionally no "follows" due to future warning
+      type = "github";
+      owner = "4jamesccraven";
+      repo = "egress";
+      # inputs.nixpkgs.follows = "nixpkgs"; # -- Disabled intentionally
     };
   };
 
