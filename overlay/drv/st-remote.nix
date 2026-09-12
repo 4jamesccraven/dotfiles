@@ -5,7 +5,7 @@
 }:
 
 let
-  ssh = "${lib.getExe pkgs.openssh}";
+  ssh = lib.getExe pkgs.openssh;
 in
 pkgs.writeShellScriptBin "st-remote" /* bash */ ''
   SCRIPT=''${ basename "$0"; }
