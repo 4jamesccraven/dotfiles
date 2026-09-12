@@ -90,67 +90,6 @@
 
       # ---[ Shell Functions ]---
       siteFunctions = {
-        # A wrapper around basic nix functionality, mostly delegates
-        # to the just file for this config
-        nx = /* bash */ ''
-          nx() {
-            _nxd() {
-                local shell="default"
-                local command="zsh"
-                local global=false
-                local seen_shell=false
-
-                while [[ $# -gt 0 ]]; do
-                    case "$1" in
-                        -c|--command)
-                            command="$2"
-                            shift 2
-                            ;;
-                        -g|--global)
-                            global=true
-                            shift
-                            ;;
-                        --)
-                            shift
-                            break
-                            ;;
-                        -*)
-                            echo "Unknown argument $1"
-                            return 1
-                            ;;
-                        *)
-                            if ! $seen_shell; then
-                                shell="$1"
-                                seen_shell=true
-                                shift
-                            else
-                                echo "Unexpected argument $1"
-                                return 1
-                            fi
-                            ;;
-                    esac
-                done
-
-                if $global; then
-                    dir="/home/jamescraven/nixos"
-                else
-                    dir="."
-                fi
-
-                nix develop "''${dir}#''${shell}" -c $command
-            }
-
-            # If of form `nx d` use the above function
-            if [ "$1" = "d" ] || [ "$1" = "develop" ]; then
-              shift
-              _nxd "$@"
-            # Otherwise delegate to justfile
-            else
-              just --justfile /home/jamescraven/nixos/justfile "$@"
-            fi
-          }
-        '';
-
         tldr =
           let
             tealdeer = "${lib.getExe pkgs.tealdeer}";

@@ -3,6 +3,9 @@
 {
   home-manager.users.jamescraven.home = {
     shellAliases = {
+      # :> System Justfile
+      nx = "just --justfile /home/jamescraven/nixos/justfile";
+
       # :> Abbreviations
       # keep-sorted start
       c = "clear";

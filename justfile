@@ -1,5 +1,6 @@
 alias b := build
 alias c := clean
+alias d := develop
 alias gu := pull
 
 [private]
@@ -37,7 +38,7 @@ boot: validate
     @nh os boot .
 
 # Update nvim plugins
-[group('Neovim')]
+[group('System State')]
 update-nvim:
     @nvim -c 'PackUpdate' -c 'wq'
 
@@ -45,6 +46,28 @@ update-nvim:
 [group('System State')]
 info:
     @nh os info
+
+# ---[ Nix Develop Wrapper ]---
+
+# A wrapper for `nix develop` with sensible defaults.
+[arg('cmd', long='cmd', short='c', help='The command the dev shell should run.')]
+[arg('global', long='global', short='g', value='true', help="Use the system flake's shells instead of the CWD.")]
+[arg('help', long='help', short='h', value='true', help='Show this message and exit.')]
+[arg('shell', help='The dev shell to use (optional).')]
+[group('Tooling')]
+[no-cd]
+develop shell='' global='false' cmd='zsh' help='false':
+    #!/usr/bin/env bash
+    if [[ "{{ help }}" == "true" ]]; then
+        just --justfile ~/nixos/justfile --usage develop
+        exit 0
+    fi
+
+    if [[ "{{ global }}" == "true" ]]; then
+        nix develop ~/nixos{{ if shell != "" { "#" + shell } else { "" } }} -c {{ cmd }}
+    else
+        nix develop .{{ if shell != "" { "#" + shell } else { "" } }} -c {{ cmd }}
+    fi
 
 # ---[ Version Control ]---
 # Revert the system to HEAD
