@@ -36,7 +36,6 @@
     qalculate-gtk
 
     # :> Music
-    # TODO: This should probably be a trait. I don't need this on RioTinto
     ardour
     musescore
 
