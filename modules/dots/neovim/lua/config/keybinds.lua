@@ -9,8 +9,8 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Enable mouse
 vim.opt.mouse = 'a'
+
 --> Keymap Configuration <--
---
 -- Split navigation
 map('n', '<leader>vv', ':vsplit<CR>')
 map('n', '<leader>vs', ':split<CR>')

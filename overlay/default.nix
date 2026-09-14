@@ -13,7 +13,7 @@ in
     # :> Local Overlay
     (overlayFromDir ./drv)
 
-    # :> mkdev
+    # :> Other repos by me
     inputs.mkdev.overlays.default
     inputs.ns.overlays.default
     inputs.egress.overlays.default
