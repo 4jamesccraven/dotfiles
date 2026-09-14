@@ -36,18 +36,9 @@
     qalculate-gtk
 
     # :> Music
+    # TODO: This should probably be a trait. I don't need this on RioTinto
     ardour
     musescore
-
-    # :> Games
-    (prismlauncher.override {
-      jdks = [
-        temurin-bin-8
-        temurin-bin-17
-        temurin-bin-21
-        openjdk25
-      ];
-    })
 
     # ---[ CLI ]---
     # :> Coreutils-esque

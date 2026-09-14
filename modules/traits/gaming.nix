@@ -22,6 +22,16 @@
   environment.systemPackages = with pkgs; [
     heroic
     piper # belongs w/ hardware
+
+    # Minecraft isn't on any major store front.
+    (prismlauncher.override {
+      jdks = [
+        temurin-bin-8
+        temurin-bin-17
+        temurin-bin-21
+        openjdk25
+      ];
+    })
   ];
   # :> Performance
   programs.gamemode.enable = true;
