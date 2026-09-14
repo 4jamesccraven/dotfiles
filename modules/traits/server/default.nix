@@ -8,21 +8,31 @@
 
   Enables:
     :> User Level
-    dots  => A few handpicked dotfiles useful for working on a headless machine
+    dots     => A few handpicked dotfiles useful for working on a headless machine
 
     :> System Level
-    avahi => Allows other machines to find the server via local MDNS
+    avahi    => Allows other machines to find the server via local MDNS
+
+    :> Config Level
+    jellyfin => A media server for movies, series, and music
+    kavita   => A media server for books, comics, and manga
+    immich   => A media server for images and videos
 */
 {
   imports = [
     # :> Super traits
-    ./machine.nix
+    ../machine.nix
     # :> Components
-    ../dots/bat.nix
-    ../dots/git.nix
-    ../dots/lsd.nix
-    ../dots/yazi.nix
-    ../dots/zsh.nix
+    # keep-sorted start
+    ../../dots/bat.nix
+    ../../dots/git.nix
+    ../../dots/lsd.nix
+    ../../dots/yazi.nix
+    ../../dots/zsh.nix
+    ./immich.nix
+    ./jellyfin.nix
+    ./kavita.nix
+    # keep-sorted end
   ];
 
   # ---[ Software ]---

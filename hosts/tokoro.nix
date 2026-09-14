@@ -23,16 +23,25 @@
   imports = [
     inputs.egress.nixosModules.default
     # keep-sorted start
-    ../modules/traits/immich.nix
-    ../modules/traits/jellyfin-service.nix
-    ../modules/traits/kavita.nix
-    ../modules/traits/server.nix
+    ../modules/traits/server
     ../modules/traits/syncthing.nix
     # keep-sorted end
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   networking.hostName = "tokoro";
+
+  # :> Optional Server Modules.
+  ext.server = {
+    immich.enable = true;
+    jellyfin.enable = true;
+    kavita.enable = true;
+  };
+
+  # :> Egressd
+  services.egressd.enable = true;
+  users.users.jamescraven.extraGroups = [ "egress" ];
+  networking.firewall.allowedTCPPorts = [ 50925 ];
 
   # :> File backups
   services.borgbackup.jobs.main = {
@@ -50,11 +59,6 @@
     compression = "lz4";
     startAt = "daily";
   };
-
-  # :> Getting spied on
-  services.egressd.enable = true;
-  users.users.jamescraven.extraGroups = [ "egress" ];
-  networking.firewall.allowedTCPPorts = [ 50925 ];
 
   # ---[ Hardware ]---
   boot.initrd.availableKernelModules = [

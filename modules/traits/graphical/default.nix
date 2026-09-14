@@ -15,12 +15,13 @@
       :> Config Level
       hyprland           => Enablable NixOS module for hyprland
       gnome              => Enablable NixOS module for GNOME
+      displayManager     => A toggle to determine the Display Manager.
 */
 {
   imports = [
-    # :> super traits
+    # :> Super Traits
     ../machine.nix
-    # :> trait omponents
+    # :> Trait Components
     # keep-sorted start
     ./display-manager.nix
     ./gnome.nix
