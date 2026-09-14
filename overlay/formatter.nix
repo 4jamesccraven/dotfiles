@@ -37,7 +37,7 @@ pkgs.treefmt.withConfig {
 
       nixfmt = {
         command = "nixfmt";
-        includes = [ "*" ];
+        includes = [ "*.nix" ];
       };
 
       statix = {
