@@ -23,6 +23,7 @@
   imports = [
     inputs.egress.nixosModules.default
     # keep-sorted start
+    ../modules/traits/immich.nix
     ../modules/traits/jellyfin-service.nix
     ../modules/traits/kavita.nix
     ../modules/traits/server.nix

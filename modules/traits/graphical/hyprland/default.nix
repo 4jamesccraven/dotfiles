@@ -54,7 +54,7 @@
     environment.pathsToLink = [ "/share/hypr" ];
 
     home-manager.users.jamescraven =
-      { ... }@hmArgs:
+      hmArgs:
       let
         hmCfg = hmArgs.config;
       in
