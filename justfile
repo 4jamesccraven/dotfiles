@@ -89,6 +89,7 @@ develop shell='' global='false' cmd='zsh' help='false':
 
 # Alias for `ns shell` or `nix shell nixpkgs#$package`.
 [group('Tooling')]
+[no-cd]
 [no-exit-message]
 shell package="":
     #!/usr/bin/env bash
@@ -100,6 +101,7 @@ shell package="":
 
 # Alias for `ns run` or `nix run nixpkgs#$package`.
 [group('Tooling')]
+[no-cd]
 [no-exit-message]
 run package="":
     #!/usr/bin/env bash
