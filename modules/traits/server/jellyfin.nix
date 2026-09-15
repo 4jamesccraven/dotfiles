@@ -32,7 +32,10 @@
     in
     lib.mkIf cfg.jellyfin.enable {
       # ---[ Jellyfin ]---
-      services.jellyfin.enable = true;
+      services.jellyfin = {
+        enable = true;
+        dataDir = "/srv/media/_jellyfin-state";
+      };
       # Open the port to others
       networking.firewall.allowedTCPPorts = [
         8096
