@@ -30,8 +30,6 @@
 
   networking.hostName = "RioTinto";
 
-  environment.systemPackages = with pkgs; [ makemkv ];
-
   # :> Graphical Settings
   ext = {
     gnome.enable = true;
@@ -78,6 +76,12 @@
         end
       '';
     };
+  };
+
+  environment.systemPackages = with pkgs; [ makemkv ];
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
   };
 
   # ---[ Hardware ] ---

@@ -48,6 +48,7 @@
     ripgrep
 
     # :> Other Utilities
+    age
     caligula
     ffmpeg-full
     file
