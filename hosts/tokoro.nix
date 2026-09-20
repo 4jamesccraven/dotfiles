@@ -1,7 +1,8 @@
 {
-  inputs,
   config,
+  inputs,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -60,6 +61,54 @@
     startAt = "daily";
   };
 
+  # :> cryptsetup
+  environment.systemPackages = [ pkgs.cryptsetup ];
+
+  # Creates a systemd target that is activated once /dev/mapper/cryptmedia
+  # becomes available. Mounts the logical volumes inside then starts services
+  # that need media from that drive.
+  systemd.targets.media-unlocked = {
+    wants = [
+      "srv-media.mount"
+      "home-jamescraven-back\\x2dups.mount"
+      "jellyfin.service"
+      "immich-server.service"
+      "kavita.service"
+      "borgbackup-job-main.timer"
+    ];
+
+    after = [
+      "dev-mapper-cryptmedia.device"
+    ];
+
+    wantedBy = [
+      "dev-mapper-cryptmedia.device"
+    ];
+  };
+
+  # Remove all wantedBy symlinks for these services and have them
+  # require /srv/media/
+  systemd = {
+    services = {
+      jellyfin = {
+        wantedBy = lib.mkForce [ ];
+        unitConfig.RequiresMountsFor = "/srv/media";
+      };
+
+      immich-server = {
+        wantedBy = lib.mkForce [ ];
+        unitConfig.RequiresMountsFor = "/srv/media";
+      };
+
+      kavita = {
+        wantedBy = lib.mkForce [ ];
+        unitConfig.RequiresMountsFor = "/srv/media";
+      };
+    };
+
+    timers."borgbackup-job-main".wantedBy = lib.mkForce [ ];
+  };
+
   # ---[ Hardware ]---
   boot.initrd.availableKernelModules = [
     "xhci_pci"
@@ -73,6 +122,10 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+
+  environment.etc.crypttab.text = ''
+    cryptmedia UUID=cfa91ab5-f93c-41e0-b737-5a0ae52bfab4 - luks,noauto
+  '';
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/348657e2-5557-4ddc-a77f-3c22ac3e78f2";
@@ -88,14 +141,16 @@
     ];
   };
 
-  fileSystems."/home/jamescraven/back-ups" = {
-    device = "/dev/disk/by-uuid/2439b066-804d-43d5-b801-5c1f027e6c3e";
+  fileSystems."/srv/media" = {
+    device = "/dev/disk/by-label/media";
     fsType = "ext4";
+    options = [ "noauto" ];
   };
 
-  fileSystems."/srv/media" = {
-    device = "/dev/disk/by-uuid/b64d5484-d46d-4053-9bc0-8c8b81ac7184";
+  fileSystems."/home/jamescraven/back-ups" = {
+    device = "/dev/disk/by-label/backups";
     fsType = "ext4";
+    options = [ "noauto" ];
   };
 
   swapDevices = [ ];
