@@ -37,8 +37,7 @@ boot: validate
 
 # Pull upstream changes and rebuild.
 [group('System State')]
-sync: validate pull build
-    @nvim -c 'PackSync' -c 'q'
+sync: validate pull build (nvim "sync")
 
 # Sync, rebuild, and clean
 [group('System State')]
