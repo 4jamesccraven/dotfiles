@@ -10,6 +10,11 @@ for _, props in ipairs(steam_props) do
 end
 
 hl.window_rule {
+    match = { class = "kitty" },
+    fullscreen_state = "0 0",
+}
+
+hl.window_rule {
     match = { class = 'vlc' },
     opaque = true,
 }
@@ -28,7 +33,7 @@ hl.window_rule {
 }
 
 hl.window_rule {
-    match = { class = '.virt-manager-wrapped', },
+    match = { class = '.virt-manager-wrapped' },
     no_blur = true,
     opaque = true,
 }
