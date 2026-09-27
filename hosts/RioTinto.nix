@@ -78,11 +78,10 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ makemkv ];
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-  };
+  environment.systemPackages = with pkgs; [
+    makemkv
+    llama-cpp-cuda
+  ];
 
   # ---[ Hardware ] ---
   boot.initrd.availableKernelModules = [
