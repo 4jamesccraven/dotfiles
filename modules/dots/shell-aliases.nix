@@ -30,8 +30,9 @@
       gi = "git init";
       gl = "git log --stat";
       gp = "git push origin HEAD";
-      gr = "git rev-parse --show-toplevel";
+      gr = "git restore";
       gs = "git status";
+      gsw = "git switch";
       gu = "git pull";
       # keep-sorted end
       gitaliases = "alias | grep git | grep -v gitaliases | sed 's/ *= */ = /' | column -t -s=";
