@@ -101,11 +101,15 @@
   networking.networkmanager.enable = true;
 
   # :> Security
-  security.sudo = {
-    enable = true;
-    extraConfig = ''
-      Defaults pwfeedback
-    '';
+  security = {
+    sudo = {
+      enable = true;
+      extraConfig = ''
+        Defaults pwfeedback
+        Defaults passwd_timeout=0
+      '';
+    };
+    pam.services.sudo.nodelay = true;
   };
   # Allow users to power-off the system etc.
   security.polkit.extraConfig = /* js */ ''
