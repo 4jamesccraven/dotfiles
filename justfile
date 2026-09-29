@@ -142,7 +142,7 @@ nvim $action:
     #!/usr/bin/env bash
     case "$action" in
         update) nvim -c "PackUpdate" ;;
-        sync) nvim -c "PackSync" ;;
+        sync) nvim -c "PackSync" -c ":q" ;;
         *) echo "invalid nvim action. this shouldn't happen" 2>&1; exit 1 ;;
     esac
 
