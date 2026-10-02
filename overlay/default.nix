@@ -17,6 +17,7 @@ in
     inputs.mkdev.overlays.default
     inputs.ns.overlays.default
     inputs.egress.overlays.default
+    inputs.sugarc.overlays.default
 
     # :> etc
     (_final: prev: {

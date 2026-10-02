@@ -38,6 +38,12 @@
       repo = "egress";
       # inputs.nixpkgs.follows = "nixpkgs"; # -- Disabled intentionally
     };
+    sugarc = {
+      type = "github";
+      owner = "4jamesccraven";
+      repo = "sugarc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -56,6 +56,7 @@
     gallery-dl
     jq
     libqalculate
+    sugarc
     tokei
     tor-dl
     unzip

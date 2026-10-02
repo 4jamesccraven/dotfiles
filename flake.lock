@@ -148,7 +148,28 @@
         "mkdev": "mkdev",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
-        "ns": "ns"
+        "ns": "ns",
+        "sugarc": "sugarc"
+      }
+    },
+    "sugarc": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790901523,
+        "narHash": "sha256-gVeUHuiIbi2uBhsoqH1XVjumqol4j6gKk8KVxVwNyJ4=",
+        "owner": "4jamesccraven",
+        "repo": "sugarc",
+        "rev": "20abdc578dbdb7336b509480143feb0d2a668f52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "4jamesccraven",
+        "repo": "sugarc",
+        "type": "github"
       }
     }
   },
