@@ -20,6 +20,7 @@ return {
         local t = ls.text_node
         local i = ls.insert_node
         local f = ls.function_node
+        local pfx = require 'luasnip.extras.postfix'.postfix
 
         ---Returns text from an arbitrary command.
         ---@param cmd string the command to run
@@ -124,24 +125,13 @@ return {
 
             -- Multiline comment
             snip({
-                trig = '^/%*',
+                trig = '/%*',
                 trigEngine = 'pattern',
                 snippetType = 'autosnippet'
             }, {
-                t({ '/*', '  ' }),
-                i(1),
-                t({ '', '*/', '' }),
+                t({ '/*' }),
                 i(0),
-            }),
-
-            -- Autocomplete attributes and let-ins (adds a semi-colon)
-            snip({
-                trig = '= ',
-                snippetType = 'autosnippet',
-            }, {
-                t('= '),
-                i(0),
-                t(';'),
+                t({ '*/' }),
             }),
         })
 
@@ -168,6 +158,20 @@ return {
                 t({ ':', '    ' }),
                 i(0, '...')
             }),
+        })
+
+        ls.add_snippets('haskell', {
+            pfx('.fn', {
+                f(function(_, parent)
+                    return parent.snippet.env.POSTFIX_MATCH .. ' :: '
+                end),
+                i(1, 'a -> b'),
+                t({ '', '' }),
+                f(function(_, parent)
+                    return parent.snippet.env.POSTFIX_MATCH .. ' = '
+                end),
+                i(0, 'undefined'),
+            })
         })
     end
 }
