@@ -53,9 +53,9 @@
       ...
     }@inputs:
     let
-      libExtension = import ./lib { inherit (nixpkgs) lib; };
+      ext = import ./lib { inherit (nixpkgs) lib; };
       lib = nixpkgs.lib // {
-        ext = libExtension;
+        inherit ext;
       };
       inherit (lib.ext)
         genFileAttrs
