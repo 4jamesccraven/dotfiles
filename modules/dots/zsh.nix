@@ -37,7 +37,7 @@
         "auto_param_slash" # Dirs are autocompleted with a trailing /
         "cdable_vars" # cd into a hashed dir without typing ~
         "cd_silent" # Don't pwd after cd
-        "correct" # Offer to correct mispelled commands
+        "correct" # Offer to correct misspelled commands
       ];
 
       # ---[ Plugins ]---

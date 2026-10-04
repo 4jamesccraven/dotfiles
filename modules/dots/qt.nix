@@ -30,7 +30,7 @@ in
         platformTheme.name = "qtct";
         style.name = "kvantum";
       }
-      # Set the apperance settings for both qt5ct _and_ qt6ct
+      # Set the appearance settings for both qt5ct _and_ qt6ct
       // (lib.genAttrs
         [
           "qt5ctSettings"

@@ -99,6 +99,6 @@ Directory Structure
    - Dots - Configurations for specific applications
    - Traits - Definitions of the capabilities a host can have
    - Constants - Variables that may be re-used in multiple places.
-- Overlay - Random things I've packaged and overlayed into my local `nixpkgs`
+- Overlay - Random things I've packaged and overlaid into my local `nixpkgs`
 - Shells - Definitions for Nix DevShells
 - Templates - Flake templates for use with `nix flake init`

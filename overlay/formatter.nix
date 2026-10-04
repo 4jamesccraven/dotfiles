@@ -10,6 +10,7 @@ pkgs.treefmt.withConfig {
     deadnix
     keep-sorted
     nixfmt
+    typos
     # keep-sorted end
 
     (writeShellScriptBin "statix" /* bash */ ''
@@ -43,6 +44,18 @@ pkgs.treefmt.withConfig {
       statix = {
         command = "statix";
         includes = [ "*.nix" ];
+      };
+
+      typos = {
+        command = "typos";
+        options = [ "--write-changes" ];
+        includes = [
+          "*.nix"
+          "*.md"
+        ];
+        excludes = [
+          "modules/dots/starship.nix" # variable names
+        ];
       };
       # keep-sorted end
     };

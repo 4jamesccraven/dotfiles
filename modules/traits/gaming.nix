@@ -5,7 +5,7 @@
   :: trait
 
   Additional software and settings to facilitate running games and using
-  common gaming hardward (e.g., peripherals, lighting).
+  common gaming hardware (e.g., peripherals, lighting).
 
   Enables
       :> System Level
@@ -13,7 +13,7 @@
       piper/ratbag   => software for managing mouse sensitivity;
       xpadneo        => drivers for controllers;
       openrgb        => rgb lighting support (technically not gaming specific);
-      gamemode/scope => software for improving game peformance;
+      gamemode/scope => software for improving game performance;
 */
 {
   # ---[ Software Support ]---
