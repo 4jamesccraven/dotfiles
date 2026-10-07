@@ -159,11 +159,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790901523,
-        "narHash": "sha256-gVeUHuiIbi2uBhsoqH1XVjumqol4j6gKk8KVxVwNyJ4=",
+        "lastModified": 1791374382,
+        "narHash": "sha256-mIC8Xtbbb07QQSi88Bx8coyog5XjsGXIOAnspDmCVwc=",
         "owner": "4jamesccraven",
         "repo": "sugarc",
-        "rev": "20abdc578dbdb7336b509480143feb0d2a668f52",
+        "rev": "f6219b46cfa0f411e2fa8ae4d8473fdb13157417",
         "type": "github"
       },
       "original": {
