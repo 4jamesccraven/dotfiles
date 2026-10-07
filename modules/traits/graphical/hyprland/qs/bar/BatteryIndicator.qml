@@ -2,13 +2,13 @@ import "../state"
 import "../widgets"
 
 ShellButton {
-    visible: Battery.available
+    visible: BatteryInfo.available
 
     icon: true
-    text: Battery.statusIcon + "\n" + Battery.capacity + "%"
+    text: BatteryInfo.statusIcon + "\n" + BatteryInfo.capacity + "%"
     textScale: 0.85
-    color: (Battery.status === "Charging" | Battery.status === "Full") ? Theme.green
-        : (Battery.capacity < 0.25) ? Theme.red
+    color: BatteryInfo.charging ? Theme.green
+        : BatteryInfo.capacity <= 25 ? Theme.red
         : Theme.text
     bgColor: Theme.mantle
 }

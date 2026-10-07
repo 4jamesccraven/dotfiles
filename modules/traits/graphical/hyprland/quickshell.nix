@@ -21,5 +21,8 @@
         xdg.configFile."quickshell".source =
           config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/nixos/modules/traits/graphical/hyprland/qs";
       };
+
+    # Explicitly enable upower
+    services.upower.enable = config.powerManagement.enable;
   };
 }
