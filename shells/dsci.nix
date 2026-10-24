@@ -6,12 +6,8 @@
     inherit (pkgs.python314Packages)
       # keep-sorted start
       fastparquet
-      ipykernel
-      jupyterlab
-      jupyterlab-lsp
       marimo
       matplotlib
-      notebook
       numpy
       pandas
       pip
