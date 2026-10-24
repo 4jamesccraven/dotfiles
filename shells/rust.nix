@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 {
-  buildInputs = with pkgs; [
-    cargo
-    libgcc
-    rustc
-  ];
-
-  RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+  buildInputs = builtins.attrValues {
+    inherit (pkgs)
+      cargo
+      libgcc
+      rustc
+      ;
+  };
 }

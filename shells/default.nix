@@ -1,9 +1,11 @@
 { pkgs, ... }:
 
 {
-  buildInputs = with pkgs; [
-    nh
-    just
-    git
-  ];
+  buildInputs = builtins.attrValues {
+    inherit (pkgs)
+      nh
+      just
+      git
+      ;
+  };
 }

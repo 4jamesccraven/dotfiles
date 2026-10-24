@@ -1,6 +1,5 @@
 {
   description = "";
-
   inputs.nixpkgs.url = "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz";
 
   outputs =
@@ -17,18 +16,6 @@
         ] (system: function nixpkgs.legacyPackages.${system});
     in
     {
-      devShells = eachDefaultSystem (pkgs: {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            cargo
-            libgcc
-            rustc
-          ];
-
-          RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-        };
-      });
-
       packages = eachDefaultSystem (pkgs: {
         default =
           with pkgs;
@@ -43,6 +30,18 @@
 
             cargoLock.lockFile = ./Cargo.lock;
           };
+      });
+
+      devShells = eachDefaultSystem (pkgs: {
+        default = pkgs.mkShell {
+          buildInputs = builtins.attrValues {
+            inherit (pkgs)
+              cargo
+              libgcc
+              rustc
+              ;
+          };
+        };
       });
     };
 }
