@@ -59,17 +59,13 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    ipv6 = false;
 
-    publish = {
-      enable = true;
-      addresses = true;
-      workstation = true;
+    settings = {
+      server.use-ipv6 = false;
+      publish = {
+        publish-addresses = true;
+        publish-workstation = true;
+      };
     };
-
-    extraConfig = /* ini */ ''
-      [publish]
-      publish-a-on-ipv6=yes
-    '';
   };
 }
