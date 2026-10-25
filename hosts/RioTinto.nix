@@ -50,7 +50,7 @@
         }
 
         hl.monitor {
-            output = 'HDMI-A-1',
+            output = 'DP-2',
             mode = '1920x1080',
             position = '320x-1080',
             scale = '1.0',
@@ -64,7 +64,7 @@
 
         hl.workspace_rule {
             workspace = '6',
-            monitor = 'HDMI-A-1',
+            monitor = 'DP-2',
             default = true,
             persistent = true,
             on_created_empty = 'brave',
@@ -72,7 +72,7 @@
 
         for i = 1, 5 do
             hl.workspace_rule { workspace = tostring(i),     monitor = 'DP-3'     }
-            hl.workspace_rule { workspace = tostring(i + 5), monitor = 'HDMI-A-1' }
+            hl.workspace_rule { workspace = tostring(i + 5), monitor = 'DP-2' }
         end
       '';
     };
