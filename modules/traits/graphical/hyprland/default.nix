@@ -48,6 +48,7 @@
       hyprshutdown
       pavucontrol
       screenie
+      xrandr
       # keep-sorted end
     ];
 
