@@ -33,10 +33,7 @@
   # :> Graphical Settings
   ext = {
     gnome.enable = true;
-    hyprland = {
-      enable = true;
-      localConfig = "";
-    };
+    hyprland.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

@@ -23,16 +23,6 @@
 
   options.ext.hyprland = {
     enable = lib.mkEnableOption "Enable Hyprland";
-    localConfig = lib.mkOption {
-      description = "Host specific config to be linked to the path `generated/local.lua`.";
-      type = lib.types.str;
-      default = "";
-      example = /* lua */ ''
-        hl.on('hyprland.start', function()
-            hl.exec_cmd 'openrgb -p main'
-        end
-      '';
-    };
   };
 
   config = lib.mkIf config.ext.hyprland.enable {
@@ -71,8 +61,6 @@
             inherit (hmCfg.home) homeDirectory;
           in
           hmCfg.lib.file.mkOutOfStoreSymlink "${homeDirectory}/nixos/modules/traits/graphical/hyprland/hypr";
-
-        xdg.configFile."hypr/generated/local.lua".text = config.ext.hyprland.localConfig;
 
         # Expose catppuccin as a lua table in the format hyprland likes to use.
         xdg.configFile."hypr/generated/theme.lua".text =

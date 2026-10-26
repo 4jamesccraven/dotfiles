@@ -26,10 +26,7 @@
   # ---[ Graphical Settings ]---
   ext = {
     displayManager = "ly";
-    hyprland = {
-      enable = true;
-      localConfig = "";
-    };
+    hyprland.enable = true;
   };
 
   # :> Stay awake with lid closed if there's external power.
