@@ -104,7 +104,7 @@ PopupWrapper {
                 property bool isCurrentMonth: model.month === displayMonth
 
                 implicitWidth: label.implicitWidth
-                implicitHeight: label.implicitHeight
+                implicitHeight: label.implicitHeight + 6
                 radius: height / 2
 
                 color: isToday ? Theme.accent : "transparent"
