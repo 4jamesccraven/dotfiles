@@ -1,3 +1,4 @@
+---[ Games ]---
 local steam_props = {
     { class = '^(steam_app_\\d+)$', title = 'negative:Warframe' },
     { class = '^(gamescope)$' },
@@ -10,20 +11,35 @@ for _, props in ipairs(steam_props) do
 end
 
 hl.window_rule {
+    match = { tag = 'game' },
+    workspace = 1,
+    fullscreen = true,
+    no_blur = true,
+}
+
+---[ Screenshot Previewer ]---
+hl.window_rule {
+    match = { class = 'com.gabm.satty' },
+    opaque = true,
+    workspace = 'special:screenshot',
+    stay_focused = true,
+}
+hl.on('window.open', function(w)
+    if w.class == 'com.gabm.satty' then
+        hl.dispatch(hl.dsp.focus { window = w })
+    end
+end)
+
+---[ Miscellaneous ]---
+hl.window_rule {
     match = { class = "kitty" },
     fullscreen_state = "0 0",
+    opacity = '0.80 override 0.80 override'
 }
 
 hl.window_rule {
     match = { class = 'vlc' },
     opaque = true,
-}
-
-hl.window_rule {
-    match = { tag = 'game' },
-    workspace = '1',
-    fullscreen = true,
-    no_blur = true,
 }
 
 hl.window_rule {

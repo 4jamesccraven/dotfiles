@@ -1,14 +1,32 @@
-hl.curve('easeOutQuint', { type = 'bezier', points = { { 0.23, 1 }, { 0.32, 1 } } })
-hl.curve('easeInOutCubic', { type = 'bezier', points = { { 0.65, 0.05 }, { 0.36, 1 } } })
-hl.curve('linear', { type = 'bezier', points = { { 0, 0 }, { 1, 1 } } })
-hl.curve('almostLinear', { type = 'bezier', points = { { 0.5, 0.5 }, { 0.75, 1 } } })
-hl.curve('quick', { type = 'bezier', points = { { 0.15, 0 }, { 0.1, 1 } } })
-hl.curve('easy', { type = 'spring', mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+---[ Curves ]---
+hl.curve('swift', {
+    type = 'bezier',
+    points = {
+        { 0.55, 0 },
+        { 0.1,  1 }
+    },
+})
 
-hl.animation({
+---[ Workspaces ]---
+hl.animation {
     enabled = true,
     leaf = 'workspaces',
     speed = 2,
-    bezier = 'almostLinear',
+    bezier = 'swift',
     style = 'slidevert'
-})
+}
+
+---[ Layers ]---
+hl.animation {
+    enabled = true,
+    leaf = 'layers',
+    speed = 1.5,
+    bezier = 'swift',
+    style = 'fade',
+}
+
+-- Disable fade effect
+hl.animation {
+    enabled = false,
+    leaf = 'fadeLayers',
+}

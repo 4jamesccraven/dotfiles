@@ -54,6 +54,11 @@ if hostname == 'RioTinto' then
         on_created_empty = 'brave',
     }
 
+    hl.workspace_rule {
+        workspace = '7',
+        on_created_empty = 'kitty btop',
+    }
+
     -- Toggles the active window between the TV and the previous monitor.
     hl.bind('SUPER + G', function()
         local gws_id = 11

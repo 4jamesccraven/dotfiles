@@ -22,7 +22,7 @@
 
       # :> Miscellaneous Settings
       settings = {
-        background_opacity = "0.9";
+        background_opacity = "1";
         font_features = "FiraCodeNFM-Reg +ss02";
       };
     };
