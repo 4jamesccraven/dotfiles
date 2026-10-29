@@ -85,10 +85,13 @@ PopupWrapper {
         }
 
         MonthGrid {
+            id: monthGrid
             width: parent.width
             month: displayMonth
             year: displayYear
             locale: Qt.locale()
+
+            property real cellHeight: 24
 
             delegate: Rectangle {
                 required property var model
@@ -104,7 +107,7 @@ PopupWrapper {
                 property bool isCurrentMonth: model.month === displayMonth
 
                 implicitWidth: label.implicitWidth
-                implicitHeight: label.implicitHeight + 6
+                implicitHeight: monthGrid.cellHeight
                 radius: height / 2
 
                 color: isToday ? Theme.accent : "transparent"
