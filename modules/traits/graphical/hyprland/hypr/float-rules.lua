@@ -19,9 +19,9 @@ local float_generic = {
     { class = 'brave',                     title = '^(.* wants to (open|save))$', },
     { class = 'brave',                     title = 'Save File', },
     { class = 'xdg-desktop-portal-gtk',    title = 'xdg-desktop-portal-gtk', },
+    { class = 'xdg-desktop-portal-gtk',    title = '^(.* wants to (open|save))$', },
     -- Steam
     { class = 'steam',                     title = 'Steam', },
-    -- Standalone apps
     { class = 'blueman-manager',           title = 'Bluetooth Devices', },
     { class = 'org.gnome.Nautilus' },
     { class = 'org.telegram.desktop' },
