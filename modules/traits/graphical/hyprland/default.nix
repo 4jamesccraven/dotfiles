@@ -35,6 +35,7 @@
     environment.systemPackages = with pkgs; [
       # keep-sorted start
       brightnessctl
+      hyprpicker
       hyprshutdown
       pavucontrol
       screenie

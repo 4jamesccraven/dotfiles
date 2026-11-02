@@ -15,9 +15,10 @@ local binds = {
     { 'SUPER + V',             'hyprshutdown',                                               { cmd = true, } },
     { 'SUPER + SHIFT + V',     'shutdown now',                                               { cmd = true, } },
     { 'switch:on:Lid Switch',  'hyprlock',                                                   { cmd = true, locked = true } },
-    -- Screenshots
+    -- Screenshots et al.
     { 'Print',                 'screenie',                                                   { cmd = true, } },
     { 'SHIFT + Print',         'screenie output',                                            { cmd = true, } },
+    { 'SUPER + P',             'hyprpicker -a',                                              { cmd = true, } },
 
     -- :> Window Control
     -- Close window
