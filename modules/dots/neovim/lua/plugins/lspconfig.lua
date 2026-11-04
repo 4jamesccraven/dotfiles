@@ -1,9 +1,15 @@
+local function hostname_expr(expr)
+    local hostname = require 'config.hostname'
+    local flake_path = '/home/jamescraven/nixos'
+
+    return '(builtins.getFlake (toString ' .. flake_path .. ')).nixosConfigurations.' .. hostname .. '.' .. expr
+end
+
 return {
     owner = 'neovim',
     repo = 'nvim-lspconfig',
     config = function()
         local map = require 'config.map'
-        local hostname = require 'config.hostname'
         local servers = {
             -- Always Installed
             bashls = true,
@@ -21,12 +27,10 @@ return {
                         },
                         options = {
                             nixos = {
-                                expr = '(builtins.getFlake (toString ./.)).nixosConfigurations.' ..
-                                    hostname .. '.options',
+                                expr = hostname_expr('options'),
                             },
                             home_manager = {
-                                expr = '(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.' ..
-                                    hostname .. '.options.home-manager.users.type.getSubOptions []',
+                                expr = hostname_expr('options.home-manager.users.type.getSubOptions []'),
                             },
                         }
                     }
