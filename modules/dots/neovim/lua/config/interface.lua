@@ -27,14 +27,29 @@ vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
 
 -- Set tabsize for *.nix
-local group = vim.api.nvim_create_augroup('NixTabSettings', { clear = true })
+local nix_ft = vim.api.nvim_create_augroup('NixTabSettings', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-    group = group,
+    group = nix_ft,
     pattern = 'nix',
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2
         vim.opt_local.expandtab = true
+    end
+})
+
+-- Set tabsize for *.go
+-- NOTE: this is the same as my default settings, Go just doesn't understand what consent is.
+local go_ft = vim.api.nvim_create_augroup('GoTabSettings', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+    group = go_ft,
+    pattern = 'go',
+    callback = function()
+        vim.opt_local.tabstop = 4
+        vim.opt_local.softtabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.expandtab = true
+        vim.opt_local.list = true
     end
 })
 

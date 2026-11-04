@@ -116,6 +116,16 @@ return {
                         buffer = args.buf,
                         callback = function()
                             vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+
+                            if vim.bo.filetype == 'go' then
+                                local lines = vim.api.nvim_buf_get_lines(args.buf, 0, -1, false)
+                                for i, line in ipairs(lines) do
+                                    lines[i] = line:gsub('^\t+', function(tabs)
+                                        return string.rep('    ', #tabs)
+                                    end)
+                                end
+                                vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, lines)
+                            end
                         end,
                     })
                 end
