@@ -7,9 +7,9 @@ local M = {}
 ---@field media? boolean
 
 ---A helper to make a Hyprland bind.
----@param keys string The keys for the keybind
----@param dispatcher string|function|HL.Dispatcher What happens when the bind is activated
----@param opts? HLX.BindOpts Additional options
+---@param keys string                               The keys for the keybind
+---@param dispatcher string|function|HL.Dispatcher  What happens when the bind is activated
+---@param opts? HLX.BindOpts                        Additional options
 ---@return nil
 function M.bind(keys, dispatcher, opts)
     opts = opts or {}

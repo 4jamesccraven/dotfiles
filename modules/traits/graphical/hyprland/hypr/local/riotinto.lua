@@ -1,14 +1,19 @@
 local hostname = require 'config.local.hostname'
 
 if hostname == 'RioTinto' then
+    -- Outputs
+    local primary    = 'desc:LG Electronics LG ULTRAWIDE 0x000769E5'
+    local secondary  = 'desc:ONN 100002487'
+    local television = 'desc:Samsung Electric Company SAMSUNG 0x01000E00'
+
     hl.on('hyprland.start', function()
         hl.exec_cmd 'openrgb -p main'
-        hl.exec_cmd 'xrandr --output DP-3 --primary'
+        hl.exec_cmd 'xrandr --output DP-2 --primary'
+        hl.exec_cmd('brave', { workspace = '6', })
         hl.exec_cmd 'steam -silent'
     end)
 
     -- Primary Monitor (Ultrawide)
-    local primary = 'desc:LG Electronics LG ULTRAWIDE 0x000769E5'
     hl.monitor {
         output = primary,
         mode = '2560x1080@75',
@@ -17,7 +22,6 @@ if hostname == 'RioTinto' then
     }
 
     -- Second Monitor
-    local secondary = 'desc:ONN 100002487'
     hl.monitor {
         output = secondary,
         mode = '1920x1080',
@@ -26,7 +30,6 @@ if hostname == 'RioTinto' then
     }
 
     -- TV
-    local television = 'desc:Samsung Electric Company SAMSUNG 0x01000E00'
     hl.monitor {
         output = television,
         mode = '1920x1080@60',
@@ -36,8 +39,8 @@ if hostname == 'RioTinto' then
 
     -- Workspace Partitioning
     for i = 1, 5 do
-        hl.workspace_rule { workspace = tostring(i), monitor = 'DP-3' }
-        hl.workspace_rule { workspace = tostring(i + 5), monitor = 'DP-2' }
+        hl.workspace_rule { workspace = tostring(i), monitor = primary }
+        hl.workspace_rule { workspace = tostring(i + 5), monitor = secondary }
     end
 
     hl.workspace_rule {
@@ -51,7 +54,6 @@ if hostname == 'RioTinto' then
         monitor = secondary,
         default = true,
         persistent = true,
-        on_created_empty = 'brave',
     }
 
     hl.workspace_rule {
