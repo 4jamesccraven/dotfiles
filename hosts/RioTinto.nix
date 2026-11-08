@@ -30,12 +30,9 @@
 
   networking.hostName = "RioTinto";
 
-  # :> Graphical Settings
-  ext = {
-    gnome.enable = true;
-    hyprland.enable = true;
-  };
+  ext.hyprland.enable = true;
 
+  services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
     makemkv
     llama-cpp-cuda
