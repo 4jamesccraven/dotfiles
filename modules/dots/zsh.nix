@@ -56,6 +56,7 @@
       # ---[ .zshrc ]---
       initContent = /* bash */ ''
         zstyle ':completion:*' insert-tab false # Disable inserting tab at the beginning of a line
+        compdef _ns ns
 
         # fzf-zsh integration and theming
         source <(${lib.getExe pkgs.fzf} --zsh)

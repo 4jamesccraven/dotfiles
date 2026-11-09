@@ -128,11 +128,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789304765,
-        "narHash": "sha256-s3r9huyU7EDnIflJgdlgYAhMWFzla+u6EOWD+M0h+wE=",
+        "lastModified": 1794243528,
+        "narHash": "sha256-LCM7ekDyGASYDGof2G4RByI0rbiCQnII3Zssn22Lf5E=",
         "owner": "4jamesccraven",
         "repo": "ns",
-        "rev": "0bc43f4b9f30de68ed437a960002a81b3719e33a",
+        "rev": "06b21b8ca846a939c33297b54fbc25cc6df66a2c",
         "type": "github"
       },
       "original": {
