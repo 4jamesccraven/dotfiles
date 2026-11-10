@@ -34,10 +34,10 @@
 
     environment.systemPackages = with pkgs; [
       # keep-sorted start
-      nautilus
       brightnessctl
       hyprpicker
       hyprshutdown
+      nautilus
       pavucontrol
       screenie
       xrandr

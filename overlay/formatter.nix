@@ -4,6 +4,15 @@
   ...
 }:
 
+/*
+  ====[ Treefmt ]====
+  :: dotfile
+
+  A custom formatter for this flake, and everything else in the repo.
+
+  This is damn-near ripped from isabelroses's dotfiles. Huge shoutout to her.
+  <https://github.com/isabelroses/dotfiles>
+*/
 pkgs.treefmt.withConfig {
   runtimeInputs = with pkgs; [
     # keep-sorted start
