@@ -24,6 +24,15 @@ hl.config {
         active_opacity = 0.95,
         inactive_opacity = 0.90,
         rounding = 10,
+
+        blur = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
+            variant = 'acrylic',
+            acrylic = {
+                bulb = 24.0,
+                clarity = 0.3,
+            },
+        },
     },
     dwindle = {
         preserve_split = true,
