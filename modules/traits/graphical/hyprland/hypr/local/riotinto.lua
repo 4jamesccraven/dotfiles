@@ -1,4 +1,5 @@
 local hostname = require 'config.local.hostname'
+local term = require 'generated.terminal'
 
 if hostname == 'RioTinto' then
     -- Outputs
@@ -56,10 +57,17 @@ if hostname == 'RioTinto' then
         persistent = true,
     }
 
-    hl.workspace_rule {
-        workspace = '7',
-        on_created_empty = 'kitty btop',
-    }
+    hl.on(
+        'workspace.created',
+        ---@param ws HL.Workspace
+        function(ws)
+            if not ws.id then return end
+            if ws.id == 7 and ws.is_empty then
+                hl.dispatch(hl.dsp.exec_cmd(term.run_in_term .. " btop"))
+            end
+        end
+    )
+
 
     -- Toggles the active window between the TV and the previous monitor.
     hl.bind('SUPER + G', function()
