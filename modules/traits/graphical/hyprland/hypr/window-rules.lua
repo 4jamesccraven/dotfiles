@@ -34,7 +34,7 @@ end)
 hl.window_rule {
     match = { class = 'kitty' },
     fullscreen_state = '0 0',
-    opacity = '0.82 override 0.82 override'
+    opacity = '0.80 override 0.80 override'
 }
 
 hl.window_rule {
