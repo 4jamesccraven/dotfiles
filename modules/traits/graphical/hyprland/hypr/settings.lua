@@ -29,8 +29,8 @@ hl.config {
             ---@diagnostic disable-next-line: assign-type-mismatch
             variant = 'acrylic',
             acrylic = {
-                bulb = 24.0,
-                clarity = 0.3,
+                bulb = 10.0,
+                clarity = 0.1,
             },
         },
     },
