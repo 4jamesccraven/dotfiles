@@ -6,7 +6,7 @@
     inherit (pkgs.python314Packages)
       # keep-sorted start
       fastparquet
-      marimo
+      # marimo
       matplotlib
       numpy
       pandas
