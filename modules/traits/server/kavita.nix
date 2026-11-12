@@ -27,7 +27,8 @@
 
       services.kavita = {
         enable = true;
-        tokenKeyFile = "/var/lib/secrets/kavita-token";
+        settings.TokenKey = "@token_key@";
+        credentials.token_key = "/var/lib/secrets/kavita-token";
       };
 
       networking.firewall.allowedTCPPorts = [ 5000 ];
