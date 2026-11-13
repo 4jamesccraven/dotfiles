@@ -7,6 +7,7 @@
   Configures Colour Theme, Icon Theme, and Cursor Theme with GTK applications.
 */
 {
+  programs.dconf.enable = true;
   home-manager.users.jamescraven =
     let
       theme = {
@@ -38,6 +39,12 @@
         cursorTheme = {
           name = "Dracula-cursors";
           package = pkgs.dracula-cursors;
+        };
+      };
+
+      dconf = {
+        settings."org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
         };
       };
     };
