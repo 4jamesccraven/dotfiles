@@ -26,6 +26,7 @@
   };
 
   config = lib.mkIf config.ext.hyprland.enable {
+    # ---[ Software ]---
     # Enable in *NixOS*
     programs.hyprland = {
       enable = true;
@@ -52,6 +53,7 @@
         hmCfg = hmArgs.config;
       in
       {
+        # ---[ Config Files ]---
         # Stub to point hyprland to the config subdirectory.
         xdg.configFile."hypr/hyprland.lua".text = /* lua */ ''
           require 'config'
@@ -110,6 +112,12 @@
             }
             return term
           '';
+
+        # ---[ Extra Aliases ]---
+        home.shellAliases = {
+          hyproff = "hyprshutdown -p poweroff";
+          hypreboot = "hyprshutdown -p reboot";
+        };
       };
 
   };
