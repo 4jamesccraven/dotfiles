@@ -59,6 +59,9 @@
             # :> Wayland
             xsessions = null;
             xinitrc = null;
+
+            # :> Hide Log
+            session_log = ".ly-session.log";
           };
         };
       };
