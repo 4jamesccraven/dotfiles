@@ -22,7 +22,7 @@ PopupWrapper {
 
         ShellButton {
             text: "Shutdown"
-            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Shutting Down…\" -p \"shutdown now\"'"]
+            command: ["hyprctl", "dispatch", "hl.dsp.exec_cmd 'hyprshutdown -t \"Shutting Down…\" -p poweroff'"]
         }
 
         ShellButton {
