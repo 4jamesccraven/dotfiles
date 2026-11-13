@@ -59,3 +59,14 @@ hl.window_rule {
     no_blur = true,
     opaque = true,
 }
+
+hl.on(
+    'window.open',
+    ---@param w HL.Window
+    function(w)
+        if w.class == 'blueman-applet' and
+            w.title == 'Connected' then
+            hl.dispatch(hl.dsp.window.close { window = w, })
+        end
+    end
+)
