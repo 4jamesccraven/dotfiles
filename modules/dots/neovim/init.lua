@@ -1,6 +1,8 @@
 -- Experimental plugin loader, helps with performance
 vim.loader.enable()
 
+vim.o.exrc = true
+
 -- Generic Config
 require 'config.interface'
 require 'config.keybinds'
