@@ -13,7 +13,7 @@ local binds = {
     -- Power/Session control
     { 'SUPER + L',             'hyprlock',                                                   { cmd = true, } },
     { 'SUPER + V',             'hyprshutdown',                                               { cmd = true, } },
-    { 'SUPER + SHIFT + V',     'shutdown now',                                               { cmd = true, } },
+    { 'SUPER + SHIFT + V',     'hyprshutdown -p poweroff',                                   { cmd = true, } },
     { 'switch:on:Lid Switch',  'hyprlock',                                                   { cmd = true, locked = true } },
     -- Screenshots et al.
     { 'Print',                 'screenie',                                                   { cmd = true, } },
@@ -81,13 +81,20 @@ hl.bind('SUPER + W', hl.dsp.submap 'movews')
 
 -- :> Resize
 hl.define_submap('resize', function()
-    hl.bind('h', hl.dsp.window.resize { x = -10, y = 0, relative = true }, { repeating = true })
-    hl.bind('j', hl.dsp.window.resize { x = 0, y = 10, relative = true }, { repeating = true })
-    hl.bind('k', hl.dsp.window.resize { x = 0, y = -10, relative = true }, { repeating = true })
-    hl.bind('l', hl.dsp.window.resize { x = 10, y = 0, relative = true }, { repeating = true })
+    local d_size = 10
+    local increments = {
+        { 'h', { x = -d_size, y = 0 } },
+        { 'j', { x = 0, y = d_size } },
+        { 'k', { x = 0, y = -d_size } },
+        { 'l', { x = d_size, y = 0 } },
+    }
+    for _, inc in ipairs(increments) do
+        local bind, offset = inc[1], inc[2]
+        offset.relative = true
+        hl.bind(bind, hl.dsp.window.resize(offset), { repeating = true })
+    end
 
     hl.bind('escape', hl.dsp.submap 'reset')
-    hl.bind('SUPER + R', hl.dsp.submap 'reset')
 end)
 hl.bind('SUPER + R', hl.dsp.submap 'resize')
 
