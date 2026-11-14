@@ -122,20 +122,24 @@ local function collect_plugs(dir)
     local plugs = {}
 
     while true do
-        local name, fs_type = vim.uv.fs_scandir_next(scan)
+        local name, _ = vim.uv.fs_scandir_next(scan)
         if not name then break end
 
-        if fs_type == 'file' and name:match("%.lua$") then
-            local module = 'plugins.' .. name:gsub("%.lua$", '')
-            local ok, conf = pcall(require, module)
-            if not ok then
-                vim.notify(
-                    'failed to load plugin config: ' .. module .. '\n' .. conf,
-                    vim.log.levels.ERROR
-                )
-            end
-            if ok and conf ~= nil then
-                table.insert(plugs, conf)
+        if name:match("%.lua$") then
+            local stat = vim.uv.fs_stat(dir .. '/' .. name)
+
+            if stat and stat.type == 'file' then
+                local module = 'plugins.' .. name:gsub("%.lua$", '')
+                local ok, conf = pcall(require, module)
+                if not ok then
+                    vim.notify(
+                        'failed to load plugin config: ' .. module .. '\n' .. conf,
+                        vim.log.levels.ERROR
+                    )
+                end
+                if ok and conf ~= nil then
+                    table.insert(plugs, conf)
+                end
             end
         end
     end

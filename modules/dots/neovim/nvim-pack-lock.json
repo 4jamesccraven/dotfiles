@@ -49,7 +49,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "443d92c6bea761ab54cdde46fb197a2b4d614bdd",
+      "rev": "05588aab66016c6836634b87ca2d392d097515f2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "9c235bedc4f96145e63fcad5b78cd78bce8822c4",
+      "rev": "8801162e041e34c64d0d1397cd1f353a14b01950",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "telescope.nvim": {
@@ -85,7 +85,7 @@
       "src": "https://github.com/triglav/vim-visual-increment"
     },
     "yazi.nvim": {
-      "rev": "087b673c2fa98ad3740767fc94f106e45c15734d",
+      "rev": "8a6f6c3c1819ccdf2de546589b58dfafde23c2c0",
       "src": "https://github.com/mikavilpas/yazi.nvim"
     }
   }
