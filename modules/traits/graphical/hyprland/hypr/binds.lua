@@ -23,6 +23,7 @@ local binds = {
     -- :> Window Control
     -- Close window
     { 'SUPER + Q',             hl.dsp.window.close() },
+    { 'SUPER + SHIFT + Q',     hl.dsp.window.kill() },
     -- Fullscreen
     { 'SUPER + M',             hl.dsp.window.fullscreen { mode = 'maximized' } },
     { 'SUPER + SHIFT + M',     hl.dsp.window.fullscreen { mode = 'fullscreen' } },
