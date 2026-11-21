@@ -26,6 +26,7 @@ hl.config {
         rounding = 10,
     },
     dwindle = {
+        -- Necessary to change the split direction with keybind
         preserve_split = true,
     },
     animations = {

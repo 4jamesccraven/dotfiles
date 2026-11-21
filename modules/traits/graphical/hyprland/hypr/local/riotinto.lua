@@ -68,6 +68,9 @@ if hostname == 'RioTinto' then
         end
     )
 
+    -- Treat windows slightly larger when splitting (useful for ultrawide)
+    hl.config { ['dwindle.split_width_multiplier'] = 1.25, }
+
 
     -- Toggles the active window between the TV and the previous monitor.
     hl.bind('SUPER + G', function()
