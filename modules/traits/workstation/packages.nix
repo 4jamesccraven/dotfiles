@@ -59,6 +59,7 @@
     sugarc
     tokei
     tor-dl
+    typos
     unzip
     wl-clipboard
     yt-dlp
