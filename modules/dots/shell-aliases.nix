@@ -6,11 +6,13 @@
       # :> System Justfile
       nx = "just --justfile /home/jamescraven/nixos/justfile";
 
-      # :> Abbreviations
+      # :> Abbreviations & Defaults
       # keep-sorted start
       c = "clear";
       cff = "clear; fastfetch";
       ff = "fastfetch";
+      ffmpeg = "ffmpeg -hide_banner";
+      ffprobe = "ffprobe -hide_banner";
       j = "just";
       s = "kitten ssh";
       y = "yazi";
