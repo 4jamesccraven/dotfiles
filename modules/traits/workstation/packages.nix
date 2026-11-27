@@ -45,13 +45,14 @@
     dysk
     fd
     just
+    moreutils
+    file
     ripgrep
 
     # :> Other Utilities
     age
     caligula
     ffmpeg-full
-    file
     fzf
     gallery-dl
     jq
